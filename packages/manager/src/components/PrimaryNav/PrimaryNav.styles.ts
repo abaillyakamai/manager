@@ -23,7 +23,7 @@ const slideOut = keyframes`
   },
 `;
 
-const useStyles = makeStyles<void, 'linkItem'>()(
+export const useStyles = makeStyles<void, 'linkItem'>()(
   (theme: Theme, _params, classes) => ({
     menuGrid: {
       minHeight: 64,
@@ -98,18 +98,18 @@ const useStyles = makeStyles<void, 'linkItem'>()(
           fill: theme.color.teal,
         },
       },
-      '& .icon': {
-        color: '#CFD0D2',
-        marginRight: theme.spacing(2),
-        opacity: 0.5,
-        '& svg': {
-          display: 'flex',
-          alignItems: 'center',
-          height: 20,
-          width: 20,
-          '&:not(.wBorder) circle, & .circle': {
-            display: 'none',
-          },
+    },
+    icon: {
+      color: '#CFD0D2',
+      marginRight: theme.spacing(2),
+      opacity: 0.5,
+      '& svg': {
+        display: 'flex',
+        alignItems: 'center',
+        height: 20,
+        width: 20,
+        '&:not(.wBorder) circle, & .circle': {
+          display: 'none',
         },
       },
     },
@@ -165,6 +165,3 @@ const useStyles = makeStyles<void, 'linkItem'>()(
     },
   })
 );
-
-// TODO jss-to-tss-react codemod: usages of this hook outside of this file will not be converted.
-export default useStyles;

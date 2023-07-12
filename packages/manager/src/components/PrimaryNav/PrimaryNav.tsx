@@ -29,9 +29,9 @@ import {
 } from 'src/queries/objectStorage';
 import { useStackScriptsOCA } from 'src/queries/stackscripts';
 import { isFeatureEnabled } from 'src/utilities/accountCapabilities';
-import useStyles from './PrimaryNav.styles';
+import { useStyles } from './PrimaryNav.styles';
 import { linkIsActive } from './utils';
-import ShowMoreExpansion from 'src/components/ShowMoreExpansion';
+import { CollapsibleNavItem } from './CollapsibleNavItem';
 
 type NavEntity =
   | 'Linodes'
@@ -160,22 +160,20 @@ export const PrimaryNav = (props: Props) => {
           icon: <Volume />,
         },
         {
+          containsNestedItems: true,
           display: 'Load Balancers',
           href: '/loadbalancers',
           icon: <NodeBalancer />,
-          containsNestedItems: true,
         },
         {
           belongsTo: 'Load Balancers',
           display: 'Akamai Global Load Balancers',
           href: '/loadbalancers',
-          icon: <NodeBalancer />,
         },
         {
           belongsTo: 'Load Balancers',
           display: 'NodeBalancers',
           href: '/nodebalancers',
-          icon: <NodeBalancer />,
         },
         {
           display: 'Firewalls',
@@ -372,7 +370,7 @@ interface PrimaryLinkProps extends PrimaryLink {
 }
 
 const PrimaryLink = React.memo((props: PrimaryLinkProps) => {
-  const { belongsTo, containsNestedItems, primaryLinkGroups } = props;
+  const { belongsTo, containsNestedItems, icon, primaryLinkGroups } = props;
   const _Link = ({ ...props }) => {
     const { classes, cx } = useStyles();
 
@@ -413,7 +411,7 @@ const PrimaryLink = React.memo((props: PrimaryLinkProps) => {
         data-testid={`menu-item-${display}`}
       >
         {icon && (
-          <div className="icon" aria-hidden>
+          <div className={classes.icon} aria-hidden>
             {icon}
           </div>
         )}
@@ -438,7 +436,7 @@ const PrimaryLink = React.memo((props: PrimaryLinkProps) => {
   };
 
   return containsNestedItems ? (
-    <ShowMoreExpansion name={props.display}>
+    <CollapsibleNavItem label={props.display} icon={icon}>
       <>
         {primaryLinkGroups?.map((group) => {
           const nestedItems = group.filter(
@@ -451,6 +449,7 @@ const PrimaryLink = React.memo((props: PrimaryLinkProps) => {
                 key={`nested-menu-item-${key}`}
                 {...props}
                 {...nestedItem}
+                icon={undefined}
               />
             ));
           }
@@ -458,7 +457,7 @@ const PrimaryLink = React.memo((props: PrimaryLinkProps) => {
           return null;
         })}
       </>
-    </ShowMoreExpansion>
+    </CollapsibleNavItem>
   ) : belongsTo ? null : (
     <_Link {...props} />
   );
