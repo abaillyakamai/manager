@@ -2,14 +2,12 @@ import { EventWithStore } from 'src/events';
 import { queryKey as accountNotificationsQueryKey } from 'src/queries/accountNotifications';
 import { queryKey as firewallsQueryKey } from 'src/queries/firewalls';
 import { queryKey as volumesQueryKey } from 'src/queries/volumes';
-import { getStorage, setStorage } from 'src/utilities/storage';
 
 import { queryKey } from './linodes';
 
 import type { Event } from '@linode/api-v4';
 
-const LINODES_EVENT_STORAGE_KEY = 'linodes-event-storage';
-setStorage(LINODES_EVENT_STORAGE_KEY, JSON.stringify([]));
+const storedEvents: number[] = [];
 
 /**
  * Event handler for Linode events
@@ -20,13 +18,15 @@ setStorage(LINODES_EVENT_STORAGE_KEY, JSON.stringify([]));
 export const linodeEventsHandler = ({ event, queryClient }: EventWithStore) => {
   const linodeId = event.entity?.id;
 
-  const storedEvents = getStorage(LINODES_EVENT_STORAGE_KEY);
+  // console.log('event', event);
 
   if (!storedEvents.includes(event.id) && event.percent_complete !== 100) {
     storedEvents.push(event.id);
   } else {
     storedEvents.splice(storedEvents.indexOf(event.id), 1);
   }
+
+  // console.log('storedEvents', storedEvents);
 
   // Some Linode events are an indication that the reponse from /v4/account/notifications
   // has changed, so refetch notifications.
