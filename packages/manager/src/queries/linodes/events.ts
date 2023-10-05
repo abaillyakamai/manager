@@ -18,7 +18,8 @@ const storedEvents: number[] = [];
 export const linodeEventsHandler = ({ event, queryClient }: EventWithStore) => {
   const linodeId = event.entity?.id;
 
-  // console.log('event', event);
+  console.log('EVENT: ', event);
+
 
   if (!storedEvents.includes(event.id) && event.percent_complete !== 100) {
     storedEvents.push(event.id);
@@ -26,7 +27,7 @@ export const linodeEventsHandler = ({ event, queryClient }: EventWithStore) => {
     storedEvents.splice(storedEvents.indexOf(event.id), 1);
   }
 
-  // console.log('storedEvents', storedEvents);
+  console.log('storedEvents', storedEvents);
 
   // Some Linode events are an indication that the reponse from /v4/account/notifications
   // has changed, so refetch notifications.
@@ -35,6 +36,8 @@ export const linodeEventsHandler = ({ event, queryClient }: EventWithStore) => {
   }
 
   if (!storedEvents.includes(event.id)) {
+    console.log('INVALIDATING QUERIES');
+
     switch (event.action) {
       case 'linode_migrate':
       case 'linode_migrate_datacenter':
@@ -47,6 +50,8 @@ export const linodeEventsHandler = ({ event, queryClient }: EventWithStore) => {
       case 'linode_boot':
       case 'linode_shutdown':
       case 'linode_update':
+      case 'linode_create':
+      case 'linode_clone':
         queryClient.invalidateQueries([
           queryKey,
           'linode',
@@ -83,19 +88,6 @@ export const linodeEventsHandler = ({ event, queryClient }: EventWithStore) => {
           linodeId,
           'details',
         ]);
-        queryClient.invalidateQueries([queryKey, 'paginated']);
-        queryClient.invalidateQueries([queryKey, 'all']);
-        queryClient.invalidateQueries([queryKey, 'infinite']);
-        return;
-      case 'linode_create':
-      case 'linode_clone':
-        queryClient.invalidateQueries([
-          queryKey,
-          'linode',
-          linodeId,
-          'details',
-        ]);
-        queryClient.invalidateQueries([queryKey, 'linode', linodeId, 'disks']);
         queryClient.invalidateQueries([queryKey, 'paginated']);
         queryClient.invalidateQueries([queryKey, 'all']);
         queryClient.invalidateQueries([queryKey, 'infinite']);
