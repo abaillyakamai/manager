@@ -18,11 +18,15 @@ const storedEvents: number[] = [];
 export const linodeEventsHandler = ({ event, queryClient }: EventWithStore) => {
   const linodeId = event.entity?.id;
 
+  if (!linodeId) {
+    return;
+  }
+
   console.log('EVENT: ', event);
 
   const initialSize = storedEvents.length;
 
-  if (!storedEvents.includes(event.id)) {
+  if (!storedEvents.includes(event.id) && event.percent_complete !== null) {
     storedEvents.push(event.id);
   } else if (event.percent_complete === 100) {
     const index = storedEvents.indexOf(event.id);
@@ -32,10 +36,6 @@ export const linodeEventsHandler = ({ event, queryClient }: EventWithStore) => {
   }
 
   const finalSize = storedEvents.length;
-
-  if (!linodeId || ['scheduled'].includes(event.status)) {
-    return;
-  }
 
   if (initialSize === finalSize) {
     return;
