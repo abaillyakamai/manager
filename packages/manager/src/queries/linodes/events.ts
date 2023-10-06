@@ -43,6 +43,22 @@ export const linodeEventsHandler = ({ event, queryClient }: EventWithStore) => {
 
   console.log('STORED EVENTS: ', storedEvents);
 
+  if (
+    ['linode_migrate', 'linode_migrate_datacenter', 'linode_resize'].includes(
+      event.action
+    ) &&
+    event.percent_complete === 100
+  ) {
+    setTimeout(() => {
+      queryClient.invalidateQueries([queryKey, 'linode', linodeId, 'details']);
+      queryClient.invalidateQueries([queryKey, 'paginated']);
+      queryClient.invalidateQueries([queryKey, 'all']);
+      queryClient.invalidateQueries([queryKey, 'infinite']);
+
+      console.count('INVALIDATING RESIZE AND MIGRATION QUERIES');
+    }, 20_000);
+  }
+
   // Some Linode events are an indication that the reponse from /v4/account/notifications
   // has changed, so refetch notifications.
   if (shouldRequestNotifications(event)) {
