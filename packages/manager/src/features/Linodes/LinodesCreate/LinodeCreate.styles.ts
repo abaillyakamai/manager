@@ -1,11 +1,9 @@
-import { styled } from 'src/utilities/styled';
-
 import { Box } from 'src/components/Box';
 import { Button } from 'src/components/Button/Button';
 import { Link } from 'src/components/Link';
 import { Paper } from 'src/components/Paper';
 import { TabPanels } from 'src/components/ReachTabPanels';
-import { isPropValid } from 'src/utilities/isPropValid';
+import { styled } from 'src/utilities/styled';
 
 import type { LinodeCreateProps } from './LinodeCreate';
 
@@ -35,7 +33,6 @@ export const StyledForm = styled('form', { label: 'StyledForm' })({
 
 export const StyledMessageDiv = styled('div', {
   label: 'StyledMessageDiv',
-  shouldForwardProp: (prop) => isPropValid(['showAgreement'], prop),
 })<StyledLinodeCreateProps>(({ showAgreement, theme }) => ({
   display: 'flex',
   flexDirection: 'column' as const,
@@ -66,7 +63,7 @@ export const StyledPaper = styled(Paper, { label: 'StyledPaper' })(
 );
 
 export const StyledTabPanel = styled(TabPanels, { label: 'StyledTabPanel' })(
-  ({ theme }) => ({
+  () => ({
     '& .MuiPaper-root': {
       padding: 0,
     },

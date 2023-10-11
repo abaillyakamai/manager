@@ -1,10 +1,10 @@
 import Close from '@mui/icons-material/Close';
-import { styled } from 'src/utilities/styled';
 import { omit } from 'lodash';
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Chip, ChipProps } from 'src/components/Chip';
+import { styled } from 'src/utilities/styled';
 import { truncateEnd } from 'src/utilities/truncate';
 
 type Variants = 'blue' | 'lightBlue';
@@ -63,9 +63,7 @@ export const Tag = (props: TagProps) => {
   );
 };
 
-const StyledChip = styled(Chip, {
-  shouldForwardProp: (prop) => prop !== 'colorVariant',
-})<TagProps>(({ theme, ...props }) => ({
+const StyledChip = styled(Chip)<TagProps>(({ theme, ...props }) => ({
   '& .MuiChip-label': {
     '&:hover': {
       borderBottomRightRadius: props.onDelete && 0,

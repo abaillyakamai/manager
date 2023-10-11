@@ -1,8 +1,6 @@
-import { styled } from 'src/utilities/styled';
-
 import { Table } from 'src/components/Table';
 import { TableCell, TableCellProps } from 'src/components/TableCell';
-import { isPropValid } from 'src/utilities/isPropValid';
+import { styled } from 'src/utilities/styled';
 
 type StyledTableCellPropsProps = TableCellProps & {
   isPlanCell?: boolean;
@@ -10,7 +8,6 @@ type StyledTableCellPropsProps = TableCellProps & {
 
 export const StyledTable = styled(Table, {
   label: 'StyledTable',
-  shouldForwardProp: (prop) => isPropValid(['isDisabled'], prop),
 })<{ isDisabled?: boolean }>(({ isDisabled, theme }) => ({
   '& tr ': {
     opacity: isDisabled ? 0.4 : 1,
@@ -24,7 +21,6 @@ export const StyledTable = styled(Table, {
 
 export const StyledTableCell = styled(TableCell, {
   label: 'StyledTableCell',
-  shouldForwardProp: (prop) => isPropValid(['isPlanCell'], prop),
 })<StyledTableCellPropsProps>(({ theme, ...props }) => ({
   '&.emptyCell': {
     borderRight: 'none',

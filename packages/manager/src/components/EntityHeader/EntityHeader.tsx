@@ -1,8 +1,8 @@
-import { Box } from 'src/components/Box';
-import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
+import { Box } from 'src/components/Box';
 import { Typography, TypographyProps } from 'src/components/Typography';
+import { styled } from 'src/utilities/styled';
 
 export interface HeaderProps {
   children?: React.ReactNode;
@@ -41,7 +41,7 @@ export const EntityHeader = ({
 };
 
 const Wrapper = styled('div', {
-  name: 'EntityHeader',
+  label: 'EntityHeader',
 })(({ theme }) => ({
   alignItems: 'center',
   backgroundColor: theme.bg.bgPaper,

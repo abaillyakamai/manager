@@ -1,11 +1,9 @@
-import { styled } from 'src/utilities/styled';
-
 import { Button } from 'src/components/Button/Button';
 import { Table } from 'src/components/Table';
 import { TableBody } from 'src/components/TableBody';
 import { TableCell } from 'src/components/TableCell';
 import { TableHead } from 'src/components/TableHead';
-import { isPropValid } from 'src/utilities/isPropValid';
+import { styled } from 'src/utilities/styled';
 
 export const StyledWrapper = styled('div')(() => ({
   display: 'flex',
@@ -131,7 +129,6 @@ export const StyledButton = styled(Button, {
 
 export const StyledButtonElement = styled('span', {
   label: 'StyledButtonElement',
-  shouldForwardProp: (prop) => isPropValid(['hidden', 'sx'], prop),
 })(({ ...props }) => ({
   ...(props.hidden && {
     textDecoration: 'line-through',

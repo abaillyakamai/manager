@@ -1,11 +1,11 @@
 import { PriceObject } from '@linode/api-v4';
-import { styled } from 'src/utilities/styled';
 import { useTheme } from '@mui/styles';
 import * as React from 'react';
 
 import { Box } from 'src/components/Box';
 import { DisplayPrice } from 'src/components/DisplayPrice';
 import { Typography } from 'src/components/Typography';
+import { styled } from 'src/utilities/styled';
 
 import { StyledSpan } from './ConfigureForm.styles';
 
@@ -64,7 +64,6 @@ export const MigrationPricing = (props: MigrationPricingProps) => {
 
 const StyledMigrationPricingContainer = styled(Box, {
   label: 'MigrationPricingContainer',
-  shouldForwardProp: (prop) => prop !== 'panelType',
 })<{ panelType: MigrationPricingProps['panelType'] }>(
   ({ panelType, theme }) => ({
     marginBottom: theme.spacing(2),

@@ -1,10 +1,10 @@
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled } from 'src/utilities/styled';
 
 import { Button } from 'src/components/Button/Button';
 import { Notice } from 'src/components/Notice/Notice';
-import { Typography } from 'src/components/Typography';
 import { Paper } from 'src/components/Paper';
+import { Typography } from 'src/components/Typography';
+import { styled } from 'src/utilities/styled';
 
 export const StyledRootContainer = styled(Paper, {
   label: 'StyledRootContainer',
@@ -45,7 +45,6 @@ export const StyledProvidersListGrid = styled(Grid, {
 
 export const StyledButton = styled(Button, {
   label: 'StyledButton',
-  shouldForwardProp: (propName) => propName !== 'isButtonEnabled',
 })<{ isButtonEnabled: boolean }>(({ isButtonEnabled, theme }) => ({
   '& > span': {
     color: theme.color.headline,

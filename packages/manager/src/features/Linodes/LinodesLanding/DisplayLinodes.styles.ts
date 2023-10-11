@@ -1,7 +1,6 @@
 import { IconButton } from 'src/components/IconButton';
 import { TableRow } from 'src/components/TableRow';
 import { Typography } from 'src/components/Typography';
-import { isPropValid } from 'src/utilities/isPropValid';
 import { styled } from 'src/utilities/styled';
 
 export const StyledTagHeaderRow = styled(TableRow, {
@@ -26,7 +25,6 @@ export const StyledTagHeader = styled(Typography, {
 
 export const StyledControlHeader = styled('div', {
   label: 'StyledControlHeader',
-  shouldForwardProp: (prop) => isPropValid(['isGroupedByTag'], prop),
 })<{ isGroupedByTag: boolean }>(({ isGroupedByTag, theme }) => ({
   alignItems: 'center',
   backgroundColor: theme.bg.tableHeader,
@@ -38,7 +36,6 @@ export const StyledControlHeader = styled('div', {
 
 export const StyledToggleButton = styled(IconButton, {
   label: 'StyledToggleButton',
-  shouldForwardProp: () => true,
 })<{ isActive: boolean }>(({ isActive, theme }) => ({
   '&.Mui-disabled': {
     display: 'none',

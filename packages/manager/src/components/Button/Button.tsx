@@ -8,7 +8,6 @@ import { TooltipIcon } from 'src/components/TooltipIcon';
 import { styled } from 'src/utilities/styled';
 
 import { rotate360 } from '../../styles/keyframes';
-import { isPropValid } from '../../utilities/isPropValid';
 
 export type ButtonType = 'outlined' | 'primary' | 'secondary';
 
@@ -43,10 +42,7 @@ export interface ButtonProps extends _ButtonProps {
   tooltipText?: string;
 }
 
-const StyledButton = styled(_Button, {
-  shouldForwardProp: (prop) =>
-    isPropValid(['compactX', 'compactY', 'loading', 'buttonType'], prop),
-})<ButtonProps>(({ theme, ...props }) => ({
+const StyledButton = styled(_Button)<ButtonProps>(({ theme, ...props }) => ({
   ...(props.buttonType === 'secondary' && {
     color: theme.textColors.linkActiveLight,
   }),

@@ -247,9 +247,11 @@ export const MigrateLinode = React.memo((props: Props) => {
       >
         {showAgreement ? (
           <StyledAgreementCheckbox
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setHasSignedAgreement(e.target.checked)
+            }
             centerCheckbox
             checked={hasSignedAgreement}
-            onChange={(e) => setHasSignedAgreement(e.target.checked)}
           />
         ) : null}
         <Button

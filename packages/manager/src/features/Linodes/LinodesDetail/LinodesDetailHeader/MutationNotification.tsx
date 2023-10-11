@@ -1,4 +1,3 @@
-import { styled } from 'src/utilities/styled';
 import { useSnackbar } from 'notistack';
 import * as React from 'react';
 
@@ -10,6 +9,7 @@ import { useStartLinodeMutationMutation } from 'src/queries/linodes/actions';
 import { useAllLinodeDisksQuery } from 'src/queries/linodes/disks';
 import { useLinodeQuery } from 'src/queries/linodes/linodes';
 import { useTypeQuery } from 'src/queries/types';
+import { styled } from 'src/utilities/styled';
 
 import { addUsedDiskSpace } from '../LinodeStorage/LinodeDisks';
 import { MutateDrawer } from '../MutateDrawer/MutateDrawer';
@@ -82,7 +82,7 @@ export const MutationNotification = (props: Props) => {
           {estimatedTimeToUpgradeInMins < 1 ? ` minute` : ` minutes`}. To learn
           more,&nbsp;
           <StyledSpan
-            onKeyDown={(e) => {
+            onKeyDown={(e: React.KeyboardEvent<HTMLButtonElement>) => {
               if (e.key === 'Enter') {
                 setIsMutationDrawerOpen(true);
               }

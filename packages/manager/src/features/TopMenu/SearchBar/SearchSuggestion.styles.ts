@@ -1,12 +1,9 @@
 import { styled } from 'src/utilities/styled';
 
-import { isPropValid } from 'src/utilities/isPropValid';
-
 import { SearchSuggestionProps } from './SearchSuggestion';
 
 export const StyledWrapperDiv = styled('div', {
   label: 'StyledWrapperDiv',
-  shouldForwardProp: (prop) => isPropValid(['isFocused'], prop),
 })<Partial<SearchSuggestionProps>>(({ isFocused, theme }) => ({
   '&:last-child': {
     borderBottom: 0,

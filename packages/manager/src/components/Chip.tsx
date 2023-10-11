@@ -1,7 +1,6 @@
 import { default as _Chip, ChipProps as _ChipProps } from '@mui/material/Chip';
 import * as React from 'react';
 
-import { isPropValid } from 'src/utilities/isPropValid';
 import { styled } from 'src/utilities/styled';
 
 export interface ChipProps extends _ChipProps {

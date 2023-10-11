@@ -1,6 +1,5 @@
 import { Linode } from '@linode/api-v4/lib/linodes';
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { Notice } from 'src/components/Notice/Notice';
@@ -10,7 +9,7 @@ import { Paper } from 'src/components/Paper';
 import { RenderGuard } from 'src/components/RenderGuard';
 import { SelectionCard } from 'src/components/SelectionCard/SelectionCard';
 import { Typography } from 'src/components/Typography';
-import { isPropValid } from 'src/utilities/isPropValid';
+import { styled } from 'src/utilities/styled';
 
 export interface ExtendedLinode extends Linode {
   heading: string;
@@ -105,7 +104,6 @@ export type StyledTypographyProps = { component: string };
 
 const StyledTypography = styled(Typography, {
   label: 'StyledTypography',
-  shouldForwardProp: (prop) => isPropValid(['component'], prop),
 })<StyledTypographyProps>(({ theme }) => ({
   padding: `${theme.spacing(2)} 0 0`,
 }));

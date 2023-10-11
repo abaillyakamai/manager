@@ -1,9 +1,9 @@
 import { SecurityQuestion } from '@linode/api-v4/lib/profile';
-import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { Box } from 'src/components/Box';
 import { Item } from 'src/components/EnhancedSelect';
+import { styled } from 'src/utilities/styled';
 
 import { Answer } from './Answer';
 import { Question } from './Question';
@@ -73,7 +73,6 @@ const StyledRootContainer = styled(Box, {
 
 const StyledQuestionContainer = styled(Box, {
   label: 'StyledQuestionContainer',
-  shouldForwardProp: (propName) => propName !== 'edit',
 })<{ edit: boolean }>(({ edit, theme }) => ({
   display: 'flex',
   flexDirection: 'column',

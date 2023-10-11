@@ -1,7 +1,6 @@
 import { StepConnector, StepIcon } from '@mui/material';
-import { styled } from 'src/utilities/styled';
 
-import { isPropValid } from 'src/utilities/isPropValid';
+import { styled } from 'src/utilities/styled';
 
 type StyledCircleIconProps = {
   activeStep: number;
@@ -10,7 +9,6 @@ type StyledCircleIconProps = {
 
 export const StyledCircleIcon = styled('div', {
   label: 'StyledCircleIcon',
-  shouldForwardProp: (prop) => isPropValid(['activeStep', 'index'], prop),
 })<StyledCircleIconProps>(({ theme, ...props }) => ({
   alignItems: 'center',
   backgroundColor:

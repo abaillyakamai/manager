@@ -1,4 +1,3 @@
-import { styled } from 'src/utilities/styled';
 import { useFormik } from 'formik';
 import * as React from 'react';
 
@@ -22,6 +21,7 @@ import { useRegionsQuery } from 'src/queries/regions';
 import { sendCreateBucketEvent } from 'src/utilities/analytics';
 import { getErrorMap } from 'src/utilities/errorUtils';
 import { isEURegion } from 'src/utilities/formatRegion';
+import { styled } from 'src/utilities/styled';
 
 import { EnableObjectStorageModal } from '../EnableObjectStorageModal';
 import ClusterSelect from './ClusterSelect';
@@ -142,7 +142,7 @@ export const CreateBucketDrawer = (props: Props) => {
         />
         {showAgreement ? (
           <StyledEUAgreementCheckbox
-            onChange={(e) =>
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               updateAccountAgreements({ eu_model: e.target.checked })
             }
             checked={Boolean(agreements?.eu_model)}

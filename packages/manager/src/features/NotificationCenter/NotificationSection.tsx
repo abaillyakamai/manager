@@ -1,5 +1,4 @@
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
-import { styled } from 'src/utilities/styled';
 import classNames from 'classnames';
 import * as React from 'react';
 import { makeStyles } from 'tss-react/mui';
@@ -11,6 +10,7 @@ import { CircleProgress } from 'src/components/CircleProgress';
 import { Hidden } from 'src/components/Hidden';
 import { Link } from 'src/components/Link';
 import { Typography } from 'src/components/Typography';
+import { styled } from 'src/utilities/styled';
 
 import type { Theme } from '@mui/material/styles';
 
@@ -231,7 +231,6 @@ const StyledLToggleContainer = styled(Box, {
 
 const StyledNotificationItem = styled(Box, {
   label: 'StyledNotificationItem',
-  shouldForwardProp: (prop) => prop !== 'content',
 })<NotificationSectionProps>(({ theme, ...props }) => ({
   '& p': {
     color: theme.textColors.headlineStatic,

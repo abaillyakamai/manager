@@ -1,6 +1,5 @@
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled } from 'src/utilities/styled';
 import { SxProps } from '@mui/system';
 import * as React from 'react';
 
@@ -8,7 +7,7 @@ import Plus from 'src/assets/icons/plusSign.svg';
 import { CircleProgress } from 'src/components/CircleProgress';
 import { IconButton } from 'src/components/IconButton';
 import { Tag } from 'src/components/Tag/Tag';
-import { isPropValid } from 'src/utilities/isPropValid';
+import { styled } from 'src/utilities/styled';
 
 import { AddTag } from './AddTag';
 
@@ -139,9 +138,7 @@ const StyledCircleDiv = styled('div')({
   zIndex: 2,
 });
 
-const StyledTagListDiv = styled('div', {
-  shouldForwardProp: (prop) => isPropValid(['hasOverflow'], prop),
-})<{
+const StyledTagListDiv = styled('div')<{
   hasOverflow: boolean;
 }>(({ ...props }) => ({
   '& .MuiChip-root:last-child': {
@@ -157,9 +154,7 @@ const StyledTagListDiv = styled('div', {
   }),
 }));
 
-const StyledTag = styled(Tag, {
-  shouldForwardProp: (prop) => isPropValid(['loading'], prop),
-})<{
+const StyledTag = styled(Tag)<{
   loading: boolean;
 }>(({ ...props }) => ({
   ...(props.loading && {

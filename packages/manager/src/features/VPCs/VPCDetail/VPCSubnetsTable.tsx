@@ -1,4 +1,4 @@
-import { useTheme } from '@mui/material/styles';
+import { Theme, useTheme } from '@mui/material/styles';
 import * as React from 'react';
 
 import { Box } from 'src/components/Box';
@@ -167,7 +167,7 @@ export const VPCSubnetsTable = (props: Props) => {
   const SubnetTableRowHead = (
     <TableRow>
       <StyledTableSortCell
-        sx={(theme) => ({
+        sx={(theme: Theme) => ({
           [theme.breakpoints.down('sm')]: {
             width: '50%',
           },

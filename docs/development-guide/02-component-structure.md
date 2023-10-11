@@ -17,8 +17,7 @@ Here is a minimal code example demonstrating the basic structure of a component 
 
 ```tsx
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import { isPropValid } from "src/utilities/isPropValid";
+import { styled } from "src/utilities/styled";
 
 interface SayHelloProps {
   name: string;
@@ -33,7 +32,6 @@ const SayHello = (props: SayHelloProps) => {
 
 const StyledH1 = styled("h1", {
   label: "StyledH1",
-  shouldForwardProp: (prop) => isPropValid(["isDisabled"], prop),
 })(({ theme, ...props }) => ({
   color: props.isDisabled ? theme.color.grey : theme.color.black,
 }));

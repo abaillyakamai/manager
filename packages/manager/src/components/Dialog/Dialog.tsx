@@ -6,7 +6,6 @@ import * as React from 'react';
 import { Box } from 'src/components/Box';
 import { DialogTitle } from 'src/components/DialogTitle/DialogTitle';
 import { Notice } from 'src/components/Notice/Notice';
-import { isPropValid } from 'src/utilities/isPropValid';
 import { convertForAria } from 'src/utilities/stringUtils';
 import { styled } from 'src/utilities/styled';
 
@@ -95,9 +94,7 @@ export const Dialog = (props: DialogProps) => {
   );
 };
 
-const StyledDialog = styled(_Dialog, {
-  shouldForwardProp: (prop) => isPropValid(['fullHeight', 'title'], prop),
-})<DialogProps>(({ theme, ...props }) => ({
+const StyledDialog = styled(_Dialog)<DialogProps>(({ theme, ...props }) => ({
   '& .MuiDialog-paper': {
     height: props.fullHeight ? '100vh' : undefined,
     maxHeight: '100%',

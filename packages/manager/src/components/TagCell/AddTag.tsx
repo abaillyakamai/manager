@@ -1,11 +1,10 @@
-import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 import { useQueryClient } from 'react-query';
 
 import Select, { Item } from 'src/components/EnhancedSelect/Select';
 import { useProfile } from 'src/queries/profile';
 import { updateTagsSuggestionsData, useTagSuggestions } from 'src/queries/tags';
-import { isPropValid } from 'src/utilities/isPropValid';
+import { styled } from 'src/utilities/styled';
 
 interface AddTagProps {
   addTag: (tag: string) => Promise<void>;
@@ -74,10 +73,7 @@ const AddTag = (props: AddTagProps) => {
 
 export { AddTag };
 
-const StyledSelect = styled(Select, {
-  shouldForwardProp: (prop) =>
-    isPropValid(['fixedMenu', 'inDetailsContext'], prop),
-})<{
+const StyledSelect = styled(Select)<{
   fixedMenu?: boolean;
   inDetailsContext?: boolean;
 }>(({ ...props }) => ({

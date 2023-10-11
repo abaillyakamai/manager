@@ -1,8 +1,6 @@
-import { styled } from 'src/utilities/styled';
-
 import { Button } from 'src/components/Button/Button';
 import { Typography } from 'src/components/Typography';
-import { isPropValid } from 'src/utilities/isPropValid';
+import { styled } from 'src/utilities/styled';
 
 interface DropZoneClassProps {
   dropzoneDisabled: boolean;
@@ -13,11 +11,6 @@ interface DropZoneClassProps {
 
 export const StyledDropZoneDiv = styled('div', {
   label: 'StyledDropZoneDiv',
-  shouldForwardProp: (prop) =>
-    isPropValid(
-      ['dropzoneDisabled', 'isDragActive', 'isDragAccept', 'isDragReject'],
-      prop
-    ),
 })<DropZoneClassProps>(({ theme, ...props }) => ({
   backgroundColor: 'transparent',
   borderColor: theme.palette.primary.main,
@@ -68,7 +61,6 @@ export const StyledFileUploadsDiv = styled('div', {
 
 export const StyledDropZoneContentDiv = styled('div', {
   label: 'StyledDropZoneContentDiv',
-  shouldForwardProp: (prop) => isPropValid(['uploadZoneActive'], prop),
 })<{
   uploadZoneActive: boolean;
 }>(({ theme, ...props }) => ({

@@ -1,7 +1,6 @@
 // This component was built asuming an unmodified MUI <Table />
 import Table from '@mui/material/Table';
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled } from 'src/utilities/styled';
 import { Theme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +10,7 @@ import { CopyTooltip } from 'src/components/CopyTooltip/CopyTooltip';
 import { TableCell } from 'src/components/TableCell';
 import { TableRow } from 'src/components/TableRow';
 import { Typography } from 'src/components/Typography';
-import { isPropValid } from 'src/utilities/isPropValid';
+import { styled } from 'src/utilities/styled';
 
 import type { HeaderProps } from './LinodeEntityDetail';
 
@@ -38,17 +37,6 @@ export const StyledLink = styled(Link, { label: 'StyledLink' })(
 
 export const StyledChip = styled(Chip, {
   label: 'StyledChip',
-  shouldForwardProp: (prop) =>
-    isPropValid(
-      [
-        'isSummaryView',
-        'hasSecondaryStatus',
-        'isOffline',
-        'isOther',
-        'isRunning',
-      ],
-      prop
-    ),
 })<StyledChipProps>(
   ({
     hasSecondaryStatus,

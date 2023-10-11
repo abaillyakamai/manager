@@ -1,38 +1,36 @@
 import { styled } from 'src/utilities/styled';
-import { isPropValid } from 'src/utilities/isPropValid';
+
 import { GaugePercentProps } from './GaugePercent';
 
 type StyledGaugePercentProps = Pick<GaugePercentProps, 'innerTextFontSize'> &
-  Required<Pick<GaugePercentProps, 'width' | 'height'>>;
+  Required<Pick<GaugePercentProps, 'height' | 'width'>>;
 
-const propKeys = ['width', 'height', 'innerTextFontSize'];
+export const StyledSubTitleDiv = styled('div')<StyledGaugePercentProps>(
+  ({ height, innerTextFontSize, theme, width }) => ({
+    color: theme.color.headline,
+    fontSize: innerTextFontSize || theme.spacing(2.5),
+    position: 'absolute',
+    textAlign: 'center',
+    top: `calc(${height}px + ${theme.spacing(1.25)})`,
+    width,
+  })
+);
 
-export const StyledSubTitleDiv = styled('div', {
-  shouldForwardProp: (prop) => isPropValid(propKeys, prop),
-})<StyledGaugePercentProps>(({ theme, width, height, innerTextFontSize }) => ({
-  color: theme.color.headline,
-  fontSize: innerTextFontSize || theme.spacing(2.5),
-  position: 'absolute',
-  textAlign: 'center',
-  top: `calc(${height}px + ${theme.spacing(1.25)})`,
-  width: width,
-}));
+export const StyledInnerTextDiv = styled('div')<StyledGaugePercentProps>(
+  ({ height, theme, width }) => ({
+    color: theme.palette.text.primary,
+    fontSize: '1rem',
+    position: 'absolute',
+    textAlign: 'center',
+    top: `calc(${height + 30}px / 2)`,
+    width,
+  })
+);
 
-export const StyledInnerTextDiv = styled('div', {
-  shouldForwardProp: (prop) => isPropValid(propKeys, prop),
-})<StyledGaugePercentProps>(({ theme, height, width }) => ({
-  position: 'absolute',
-  top: `calc(${height + 30}px / 2)`,
-  width: width,
-  textAlign: 'center',
-  fontSize: '1rem',
-  color: theme.palette.text.primary,
-}));
-
-export const StyledGaugeWrapperDiv = styled('div', {
-  shouldForwardProp: (prop) => isPropValid(propKeys, prop),
-})<StyledGaugePercentProps>(({ theme, height, width }) => ({
-  position: 'relative',
-  width: width,
-  height: `calc(${height}px + ${theme.spacing(3.75)})`,
-}));
+export const StyledGaugeWrapperDiv = styled('div')<StyledGaugePercentProps>(
+  ({ height, theme, width }) => ({
+    height: `calc(${height}px + ${theme.spacing(3.75)})`,
+    position: 'relative',
+    width,
+  })
+);

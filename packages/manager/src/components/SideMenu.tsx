@@ -1,8 +1,8 @@
 import Drawer from '@mui/material/Drawer';
-import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { Hidden } from 'src/components/Hidden';
+import { styled } from 'src/utilities/styled';
 
 import PrimaryNav from './PrimaryNav/PrimaryNav';
 
@@ -44,7 +44,6 @@ export const SideMenu: React.FC<CombinedProps> = (props) => {
 
 const StyledDrawer = styled(Drawer, {
   label: 'StyledSideMenuDrawer',
-  shouldForwardProp: (prop) => prop !== 'collapse',
 })<{ collapse?: boolean }>(({ theme, ...props }) => ({
   '& .MuiDrawer-paper': {
     backgroundColor: theme.bg.primaryNavPaper,

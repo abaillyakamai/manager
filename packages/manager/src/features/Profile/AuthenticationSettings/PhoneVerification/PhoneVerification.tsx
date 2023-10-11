@@ -7,10 +7,10 @@ import { useQueryClient } from 'react-query';
 
 import { Box } from 'src/components/Box';
 import { Button } from 'src/components/Button/Button';
+import { InputAdornment } from 'src/components/InputAdornment';
 import { LinkButton } from 'src/components/LinkButton';
 import { TextField } from 'src/components/TextField';
 import { Typography } from 'src/components/Typography';
-import { InputAdornment } from 'src/components/InputAdornment';
 import {
   queryKey,
   updateProfileData,
@@ -254,7 +254,7 @@ export const PhoneVerification = () => {
                 isPhoneInputFocused={isPhoneInputFocused}
               >
                 <StyledSelect
-                  isOptionSelected={(option) =>
+                  isOptionSelected={(option: Item) =>
                     sendCodeForm.values.iso_code === option.value
                   }
                   onChange={(item: Item) =>

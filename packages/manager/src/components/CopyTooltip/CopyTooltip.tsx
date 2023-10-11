@@ -1,10 +1,9 @@
-import { styled } from 'src/utilities/styled';
 import copy from 'copy-to-clipboard';
 import * as React from 'react';
 
 import FileCopy from 'src/assets/icons/copy.svg';
 import { Tooltip, TooltipProps } from 'src/components/Tooltip';
-import { isPropValid } from 'src/utilities/isPropValid';
+import { styled } from 'src/utilities/styled';
 
 export interface CopyTooltipProps {
   /**
@@ -73,7 +72,6 @@ export const CopyTooltip = (props: CopyTooltipProps) => {
 
 const StyledCopyTooltipButton = styled('button', {
   label: 'StyledCopyTooltipButton',
-  shouldForwardProp: (prop) => isPropValid(['copyableText', 'text'], prop),
 })<Omit<CopyTooltipProps, 'text'>>(({ theme, ...props }) => ({
   '& svg': {
     color: theme.color.grey1,

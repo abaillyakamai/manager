@@ -1,22 +1,9 @@
 import { styled } from 'src/utilities/styled';
 
-import { isPropValid } from 'src/utilities/isPropValid';
-
 import type { TableProps } from './Table';
 
 export const StyledTableWrapper = styled('div', {
   label: 'StyledTableWrapper',
-  shouldForwardProp: (prop) =>
-    isPropValid(
-      [
-        'noBorder',
-        'noOverflow',
-        'rowHoverState',
-        'spacingBottom',
-        'spacingTop',
-      ],
-      prop
-    ),
 })<TableProps>(({ theme, ...props }) => ({
   marginBottom: props.spacingBottom !== undefined ? props.spacingBottom : 0,
   marginTop: props.spacingTop !== undefined ? props.spacingTop : 0,

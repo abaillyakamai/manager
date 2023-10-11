@@ -1,16 +1,14 @@
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled } from 'src/utilities/styled';
 
 import { CopyTooltip } from 'src/components/CopyTooltip/CopyTooltip';
 import { TableCell } from 'src/components/TableCell';
 import { Typography } from 'src/components/Typography';
-import { isPropValid } from 'src/utilities/isPropValid';
+import { styled } from 'src/utilities/styled';
 
 type StyledCopyTooltipProps = { isHovered: boolean };
 
 export const StyledCopyTooltip = styled(CopyTooltip, {
   label: 'StyledCopyTooltip ',
-  shouldForwardProp: (prop) => isPropValid(['isHovered'], prop),
 })<StyledCopyTooltipProps>(({ isHovered }) => ({
   '& svg': {
     height: `12px`,
