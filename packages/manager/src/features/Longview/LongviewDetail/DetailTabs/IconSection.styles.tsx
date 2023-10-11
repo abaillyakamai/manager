@@ -1,6 +1,8 @@
-import { styled, SxProps } from '@mui/material/styles';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
+import { SxProps } from '@mui/material/styles';
+
 import { IconTextLink } from 'src/components/IconTextLink/IconTextLink';
+import { styled } from 'src/utilities/styled';
 
 const sxGrid: SxProps = {
   boxSizing: 'border-box',

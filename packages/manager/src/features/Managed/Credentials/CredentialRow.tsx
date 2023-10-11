@@ -1,5 +1,5 @@
 import { ManagedCredential } from '@linode/api-v4/lib/managed';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { DateTimeDisplay } from 'src/components/DateTimeDisplay';

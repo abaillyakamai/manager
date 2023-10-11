@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import { TableRow, TableRowProps } from 'src/components/TableRow';
 import { Typography } from 'src/components/Typography';

@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import Error from 'src/assets/icons/error.svg';
 import { H1Header } from 'src/components/H1Header/H1Header';

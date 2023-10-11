@@ -1,5 +1,5 @@
 import { ObjectStorageKey } from '@linode/api-v4/lib/object-storage';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { ActionMenu } from 'src/components/ActionMenu';

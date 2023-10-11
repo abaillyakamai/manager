@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from 'src/components/Button/Button';
 import { DeletionDialog } from 'src/components/DeletionDialog/DeletionDialog';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import { useDeleteDomainMutation } from 'src/queries/domains';
 import { getAPIErrorOrDefault } from 'src/utilities/errorUtils';
 import { useSnackbar } from 'notistack';

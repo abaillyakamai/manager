@@ -1,5 +1,5 @@
 import { APIError } from '@linode/api-v4/lib/types';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import Grid from '@mui/material/Unstable_Grid2';
 import * as React from 'react';
 

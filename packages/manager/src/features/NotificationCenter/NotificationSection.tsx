@@ -1,5 +1,5 @@
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import classNames from 'classnames';
 import * as React from 'react';
 import { makeStyles } from 'tss-react/mui';

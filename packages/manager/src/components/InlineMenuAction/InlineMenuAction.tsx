@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 

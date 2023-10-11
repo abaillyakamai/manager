@@ -1,5 +1,5 @@
 import { APIError } from '@linode/api-v4/lib/types';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import { useSnackbar } from 'notistack';
 import { assoc, clamp, equals, pathOr } from 'ramda';
 import * as React from 'react';
@@ -22,6 +22,7 @@ import { useAllVolumesQuery } from 'src/queries/volumes';
 import createDevicesFromStrings, {
   DevicesAsStrings,
 } from 'src/utilities/createDevicesFromStrings';
+import { styled } from 'src/utilities/styled';
 
 import { LinodePermissionsError } from '../LinodePermissionsError';
 import { DeviceSelection, ExtendedDisk } from './DeviceSelection';
@@ -223,11 +224,11 @@ export const StandardRescueDialog = (props: Props) => {
               slots={['sda', 'sdb', 'sdc', 'sdd', 'sde', 'sdf', 'sdg']}
             />
             <Button
-              sx={{ marginTop: theme.spacing() }}
               buttonType="secondary"
               compactX
               disabled={disabled || counter >= 6}
               onClick={incrementCounter}
+              sx={{ marginTop: theme.spacing() }}
             >
               Add Disk
             </Button>

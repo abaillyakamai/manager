@@ -12,7 +12,7 @@ import {
 } from '@linode/api-v4/lib/nodebalancers';
 import { APIError, ResourcePage } from '@linode/api-v4/lib/types';
 import { Box } from 'src/components/Box';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import {
   Lens,
   append,

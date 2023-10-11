@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import { Checkbox } from 'src/components/Checkbox';
 import { DebouncedSearchTextField } from 'src/components/DebouncedSearchTextField';

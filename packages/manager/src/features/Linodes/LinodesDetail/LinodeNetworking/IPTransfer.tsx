@@ -1,7 +1,7 @@
 import { IPRange } from '@linode/api-v4/lib/networking';
 import { APIError } from '@linode/api-v4/lib/types';
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import {
   both,
   compose,
@@ -35,6 +35,7 @@ import {
   useLinodeIPsQuery,
 } from 'src/queries/linodes/networking';
 import { getAPIErrorOrDefault } from 'src/utilities/errorUtils';
+import { styled } from 'src/utilities/styled';
 
 interface Props {
   linodeId: number;

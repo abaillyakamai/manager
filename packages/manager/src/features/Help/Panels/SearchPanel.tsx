@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { H1Header } from 'src/components/H1Header/H1Header';

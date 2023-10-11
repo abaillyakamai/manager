@@ -1,4 +1,4 @@
-import { Theme, styled } from '@mui/material/styles';
+import { Theme } from '@mui/material/styles';
 import * as React from 'react';
 import { compose } from 'recompose';
 
@@ -8,6 +8,7 @@ import { Notice } from 'src/components/Notice/Notice';
 import { Paper } from 'src/components/Paper';
 import { AppPanelSection } from 'src/features/Linodes/LinodesCreate/AppPanelSection';
 import { getQueryParamFromQueryString } from 'src/utilities/queryParams';
+import { styled } from 'src/utilities/styled';
 
 import { Panel } from './Panel';
 

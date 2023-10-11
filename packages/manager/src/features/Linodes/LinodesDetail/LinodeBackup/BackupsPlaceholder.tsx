@@ -1,5 +1,5 @@
 import { PriceObject } from '@linode/api-v4';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import VolumeIcon from 'src/assets/icons/entityIcons/volume.svg';

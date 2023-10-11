@@ -1,5 +1,5 @@
 import Popper from '@mui/material/Popper';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -24,6 +24,7 @@ import { useNotificationsQuery } from 'src/queries/accountNotifications';
 import { markAllSeen } from 'src/store/events/event.request';
 import { ThunkDispatch } from 'src/store/types';
 import { isPropValid } from 'src/utilities/isPropValid';
+import { styled } from 'src/utilities/styled';
 
 import { StyledTopMenuIconWrapper, TopMenuIcon } from '../TopMenuIcon';
 

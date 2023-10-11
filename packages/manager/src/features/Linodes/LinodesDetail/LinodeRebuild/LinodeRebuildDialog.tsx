@@ -1,4 +1,4 @@
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
 
 import { Dialog } from 'src/components/Dialog/Dialog';
@@ -7,6 +7,7 @@ import { Notice } from 'src/components/Notice/Notice';
 import { Typography } from 'src/components/Typography';
 import { useLinodeQuery } from 'src/queries/linodes/linodes';
 import { useGrants, useProfile } from 'src/queries/profile';
+import { styled } from 'src/utilities/styled';
 
 import { HostMaintenanceError } from '../HostMaintenanceError';
 import { LinodePermissionsError } from '../LinodePermissionsError';
@@ -80,8 +81,8 @@ export const LinodeRebuildDialog = (props: Props) => {
         {hostMaintenance && <HostMaintenanceError />}
         {rebuildError && <Notice variant="error">{rebuildError}</Notice>}
         <Typography
-          sx={{ paddingBottom: theme.spacing(2) }}
           data-qa-rebuild-desc
+          sx={{ paddingBottom: theme.spacing(2) }}
         >
           If you can&rsquo;t rescue an existing disk, it&rsquo;s time to rebuild
           your Linode. There are a couple of different ways you can do this:

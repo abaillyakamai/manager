@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import DragIndicator from 'src/assets/icons/drag-indicator.svg';
 import { Box } from 'src/components/Box';

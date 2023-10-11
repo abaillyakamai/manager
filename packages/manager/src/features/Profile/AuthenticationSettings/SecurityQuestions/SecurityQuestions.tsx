@@ -1,5 +1,5 @@
 import { SecurityQuestionsData } from '@linode/api-v4';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import { FormikConfig, useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
 import * as React from 'react';

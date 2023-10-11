@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import { TableRow } from 'src/components/TableRow';
 import { TableSortCell } from 'src/components/TableSortCell';

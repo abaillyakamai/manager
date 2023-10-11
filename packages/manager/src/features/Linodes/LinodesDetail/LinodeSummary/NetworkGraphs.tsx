@@ -1,6 +1,6 @@
 import { Stats } from '@linode/api-v4/lib/linodes';
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled, useTheme, Theme } from '@mui/material/styles';
+import { Theme, useTheme } from '@mui/material/styles';
 import { map, pathOr } from 'ramda';
 import * as React from 'react';
 
@@ -16,7 +16,9 @@ import {
   getMetrics,
   getTotalTraffic,
 } from 'src/utilities/statMetrics';
+import { styled } from 'src/utilities/styled';
 import { readableBytes } from 'src/utilities/unitConversions';
+
 import { StatsPanel } from './StatsPanel';
 
 export interface TotalTrafficProps {

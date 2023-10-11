@@ -1,11 +1,12 @@
 import { UserDefinedField } from '@linode/api-v4/lib/stackscripts';
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
 
 import Info from 'src/assets/icons/info.svg';
 import { SelectionCard } from 'src/components/SelectionCard/SelectionCard';
 import { APP_ROOT } from 'src/constants';
+import { styled } from 'src/utilities/styled';
 
 interface Props {
   availableImages: string[];

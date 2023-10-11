@@ -1,10 +1,11 @@
 import _Button, { ButtonProps as _ButtonProps } from '@mui/material/Button';
-import { Theme, styled, useTheme } from '@mui/material/styles';
+import { Theme, useTheme } from '@mui/material/styles';
 import { SxProps } from '@mui/system';
 import * as React from 'react';
 
 import Reload from 'src/assets/icons/reload.svg';
 import { TooltipIcon } from 'src/components/TooltipIcon';
+import { styled } from 'src/utilities/styled';
 
 import { rotate360 } from '../../styles/keyframes';
 import { isPropValid } from '../../utilities/isPropValid';

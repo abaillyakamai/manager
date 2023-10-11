@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import { Table } from 'src/components/Table';
 import { TableCell, TableCellProps } from 'src/components/TableCell';

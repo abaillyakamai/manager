@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 export const StyledCanvasContainerDiv = styled('div', {
   label: 'StyledCanvasContainerDiv',

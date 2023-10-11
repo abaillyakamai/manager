@@ -1,10 +1,11 @@
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
 
 import { Box } from 'src/components/Box';
 import { Link } from 'src/components/Link';
 import { Typography } from 'src/components/Typography';
 import { LOGIN_ROOT } from 'src/constants';
+import { styled } from 'src/utilities/styled';
 
 interface Props {
   username?: string;

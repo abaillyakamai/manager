@@ -1,7 +1,7 @@
 // This component was built asuming an unmodified MUI <Table />
 import Table from '@mui/material/Table';
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import { Theme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 

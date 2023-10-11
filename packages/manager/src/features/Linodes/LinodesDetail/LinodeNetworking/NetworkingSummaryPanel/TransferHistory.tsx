@@ -1,6 +1,6 @@
 import { Stats } from '@linode/api-v4/lib/linodes';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { Theme, styled, useTheme } from '@mui/material/styles';
+import { Theme, useTheme } from '@mui/material/styles';
 import { DateTime, Interval } from 'luxon';
 import * as React from 'react';
 
@@ -24,6 +24,7 @@ import {
 } from 'src/queries/linodes/stats';
 import { useProfile } from 'src/queries/profile';
 import { getAPIErrorOrDefault } from 'src/utilities/errorUtils';
+import { styled } from 'src/utilities/styled';
 import { readableBytes } from 'src/utilities/unitConversions';
 
 interface Props {

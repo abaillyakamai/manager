@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import cx from 'classnames';
 import * as React from 'react';
 

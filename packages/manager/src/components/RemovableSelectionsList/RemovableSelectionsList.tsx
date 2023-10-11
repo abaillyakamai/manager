@@ -1,5 +1,5 @@
 import Close from '@mui/icons-material/Close';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { Box } from 'src/components/Box';

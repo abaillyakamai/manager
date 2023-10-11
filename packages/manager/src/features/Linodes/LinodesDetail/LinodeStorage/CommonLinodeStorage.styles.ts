@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import { Typography } from 'src/components/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
 

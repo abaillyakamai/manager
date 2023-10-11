@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import { ActionsPanel } from 'src/components/ActionsPanel/ActionsPanel';
 import { Typography } from 'src/components/Typography';

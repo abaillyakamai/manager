@@ -1,6 +1,6 @@
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
-import { Theme, styled, useMediaQuery } from '@mui/material';
+import { Theme, useMediaQuery } from '@mui/material';
 import Popover from '@mui/material/Popover';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -16,6 +16,7 @@ import { Tooltip } from 'src/components/Tooltip';
 import { Typography } from 'src/components/Typography';
 import { useAccountManagement } from 'src/hooks/useAccountManagement';
 import { useGrants } from 'src/queries/profile';
+import { styled } from 'src/utilities/styled';
 
 interface MenuLink {
   display: string;

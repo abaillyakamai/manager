@@ -1,5 +1,5 @@
 import { KubeNodePoolResponse } from '@linode/api-v4';
-import { Typography, styled } from '@mui/material';
+import { Typography } from '@mui/material';
 import * as React from 'react';
 
 import { Box } from 'src/components/Box';
@@ -10,10 +10,6 @@ import { Divider } from 'src/components/Divider';
 import { Notice } from 'src/components/Notice/Notice';
 import { RenderGuard } from 'src/components/RenderGuard';
 import EUAgreementCheckbox from 'src/features/Account/Agreements/EUAgreementCheckbox';
-import {
-  getKubernetesMonthlyPrice,
-  getTotalClusterPrice,
-} from 'src/utilities/pricing/kubernetes';
 import { useFlags } from 'src/hooks/useFlags';
 import { useAccountAgreements } from 'src/queries/accountAgreements';
 import { useProfile } from 'src/queries/profile';
@@ -21,6 +17,11 @@ import { useSpecificTypes } from 'src/queries/types';
 import { extendTypesQueryResult } from 'src/utilities/extendType';
 import { isEURegion } from 'src/utilities/formatRegion';
 import { LKE_CREATE_CLUSTER_CHECKOUT_MESSAGE } from 'src/utilities/pricing/constants';
+import {
+  getKubernetesMonthlyPrice,
+  getTotalClusterPrice,
+} from 'src/utilities/pricing/kubernetes';
+import { styled } from 'src/utilities/styled';
 
 import { nodeWarning } from '../kubeUtils';
 import NodePoolSummary from './NodePoolSummary';

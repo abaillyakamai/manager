@@ -1,5 +1,5 @@
 import Avatar from '@mui/material/Avatar';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import classNames from 'classnames';
 import * as React from 'react';
 

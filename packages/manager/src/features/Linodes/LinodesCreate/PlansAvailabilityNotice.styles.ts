@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import { List } from 'src/components/List';
 import { TextTooltip } from 'src/components/TextTooltip';

@@ -2,7 +2,7 @@ import { Domain, DomainStatus } from '@linode/api-v4/lib/domains';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Hidden } from 'src/components/Hidden';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import { DateTimeDisplay } from 'src/components/DateTimeDisplay';
 import { StatusIcon } from 'src/components/StatusIcon/StatusIcon';
 import { TableCell } from 'src/components/TableCell';

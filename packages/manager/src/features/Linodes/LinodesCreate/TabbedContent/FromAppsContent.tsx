@@ -1,6 +1,6 @@
 import { Image } from '@linode/api-v4/lib/images';
 import { StackScript, UserDefinedField } from '@linode/api-v4/lib/stackscripts';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import compact from 'lodash/compact';
 import curry from 'lodash/curry';
 import { assocPath } from 'ramda';

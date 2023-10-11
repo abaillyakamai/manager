@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import { DateTime } from 'luxon';
 import * as React from 'react';
 

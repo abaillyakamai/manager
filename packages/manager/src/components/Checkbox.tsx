@@ -1,12 +1,13 @@
 import _Checkbox, { CheckboxProps } from '@mui/material/Checkbox';
-import { Theme, styled } from '@mui/material/styles';
+import { Theme } from '@mui/material/styles';
 import { SxProps } from '@mui/system';
 import * as React from 'react';
 
 import CheckboxIcon from 'src/assets/icons/checkbox.svg';
 import CheckboxCheckedIcon from 'src/assets/icons/checkboxChecked.svg';
-import { TooltipIcon } from 'src/components/TooltipIcon';
 import { FormControlLabel } from 'src/components/FormControlLabel';
+import { TooltipIcon } from 'src/components/TooltipIcon';
+import { styled } from 'src/utilities/styled';
 
 interface Props extends CheckboxProps {
   /**

@@ -1,9 +1,10 @@
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
 
 import { EntityIcon } from 'src/components/EntityIcon/EntityIcon';
 import { Typography } from 'src/components/Typography';
+import { styled } from 'src/utilities/styled';
 
 import EditableInput from './EditableInput';
 

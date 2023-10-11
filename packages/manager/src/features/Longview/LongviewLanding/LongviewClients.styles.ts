@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import Grid from '@mui/material/Unstable_Grid2';
 
 export const StyledCTAGrid = styled(Grid, { label: 'StyledCTAGrid' })(

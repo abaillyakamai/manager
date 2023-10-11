@@ -1,6 +1,6 @@
 import { cancelAccount } from '@linode/api-v4/lib/account';
 import { APIError } from '@linode/api-v4/lib/types';
-import { Theme, styled } from '@mui/material/styles';
+import { Theme } from '@mui/material/styles';
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';
@@ -10,6 +10,7 @@ import { TextField } from 'src/components/TextField';
 import { TypeToConfirmDialog } from 'src/components/TypeToConfirmDialog/TypeToConfirmDialog';
 import { Typography } from 'src/components/Typography';
 import { useProfile } from 'src/queries/profile';
+import { styled } from 'src/utilities/styled';
 
 interface Props {
   closeDialog: () => void;

@@ -5,7 +5,7 @@ import {
   NotificationType,
 } from '@linode/api-v4/lib/account';
 import { Region } from '@linode/api-v4/lib/regions';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import { DateTime } from 'luxon';
 import { path } from 'ramda';
 import * as React from 'react';

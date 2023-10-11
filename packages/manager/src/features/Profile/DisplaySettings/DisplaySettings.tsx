@@ -1,5 +1,5 @@
 import { updateUser } from '@linode/api-v4/lib/account';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -16,6 +16,7 @@ import { Typography } from 'src/components/Typography';
 import { useNotificationsQuery } from 'src/queries/accountNotifications';
 import { useMutateProfile, useProfile } from 'src/queries/profile';
 import { ApplicationState } from 'src/store';
+import { styled } from 'src/utilities/styled';
 
 import { TimezoneForm } from './TimezoneForm';
 

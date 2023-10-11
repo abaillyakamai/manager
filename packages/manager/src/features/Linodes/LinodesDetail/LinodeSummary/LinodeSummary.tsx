@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import { DateTime } from 'luxon';
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
@@ -9,8 +9,8 @@ import PendingIcon from 'src/assets/icons/pending.svg';
 import Select, { Item } from 'src/components/EnhancedSelect/Select';
 import { ErrorState } from 'src/components/ErrorState/ErrorState';
 import { LineGraph } from 'src/components/LineGraph/LineGraph';
-import { Typography } from 'src/components/Typography';
 import { Paper } from 'src/components/Paper';
+import { Typography } from 'src/components/Typography';
 import { useWindowDimensions } from 'src/hooks/useWindowDimensions';
 import {
   STATS_NOT_READY_API_MESSAGE,
@@ -26,11 +26,13 @@ import {
   formatPercentage,
   getMetrics,
 } from 'src/utilities/statMetrics';
+import { styled } from 'src/utilities/styled';
 
 import { NetworkGraphs } from './NetworkGraphs';
-import type { ChartProps } from './NetworkGraphs';
 import { StatsPanel } from './StatsPanel';
 import { getDateOptions } from './helpers';
+
+import type { ChartProps } from './NetworkGraphs';
 
 setUpCharts();
 
@@ -226,7 +228,7 @@ const LinodeSummary: React.FC<Props> = (props) => {
 
   return (
     <Paper>
-      <Grid sx={{ width: '100%', margin: 0 }} container>
+      <Grid container sx={{ margin: 0, width: '100%' }}>
         <Grid
           sx={{
             display: 'flex',

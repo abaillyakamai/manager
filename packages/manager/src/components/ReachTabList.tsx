@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import { TabList as ReachTabList, TabListProps } from '@reach/tabs';
 import * as React from 'react';
 

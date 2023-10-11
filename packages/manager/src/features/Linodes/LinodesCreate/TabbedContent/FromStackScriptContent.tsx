@@ -1,6 +1,6 @@
 import { Image } from '@linode/api-v4/lib/images';
 import { UserDefinedField } from '@linode/api-v4/lib/stackscripts';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import { assocPath, equals } from 'ramda';
 import * as React from 'react';
 

@@ -5,7 +5,7 @@ import {
 } from '@linode/api-v4/lib/linodes';
 import { APIError } from '@linode/api-v4/lib/types';
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import { equals, pathOr, repeat } from 'ramda';
 import * as React from 'react';
@@ -56,6 +56,7 @@ import {
 } from 'src/utilities/formikErrorUtils';
 import getSelectedOptionFromGroupedOptions from 'src/utilities/getSelectedOptionFromGroupedOptions';
 import scrollErrorIntoView from 'src/utilities/scrollErrorIntoView';
+import { styled } from 'src/utilities/styled';
 
 import {
   ExtendedInterface,

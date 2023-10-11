@@ -1,6 +1,6 @@
 import DoneIcon from '@mui/icons-material/Done';
 import Popper, { PopperProps } from '@mui/material/Popper';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import React from 'react';
 
 import { isPropValid } from 'src/utilities/isPropValid';

@@ -1,6 +1,6 @@
 import { StackScript, UserDefinedField } from '@linode/api-v4/lib/stackscripts';
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { Box } from 'src/components/Box';

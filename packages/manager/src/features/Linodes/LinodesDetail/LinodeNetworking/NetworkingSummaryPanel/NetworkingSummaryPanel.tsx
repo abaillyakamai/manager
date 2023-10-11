@@ -1,11 +1,12 @@
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
 
 import { Paper } from 'src/components/Paper';
 import { useLinodeQuery } from 'src/queries/linodes/linodes';
 import { useGrants } from 'src/queries/profile';
 import { getPermissionsForLinode } from 'src/utilities/linodes';
+import { styled } from 'src/utilities/styled';
 
 import { LinodePermissionsError } from '../../LinodePermissionsError';
 import { DNSResolvers } from './DNSResolvers';

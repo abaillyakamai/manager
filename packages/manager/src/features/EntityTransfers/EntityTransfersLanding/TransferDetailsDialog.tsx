@@ -1,5 +1,5 @@
 import { TransferEntities } from '@linode/api-v4/lib/entity-transfers/types';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { Dialog } from 'src/components/Dialog/Dialog';

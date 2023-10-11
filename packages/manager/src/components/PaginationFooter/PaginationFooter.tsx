@@ -1,5 +1,7 @@
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
+
+import { styled } from 'src/utilities/styled';
 
 import { Box } from '../Box';
 import Select from '../EnhancedSelect/Select';
@@ -66,9 +68,9 @@ export const PaginationFooter = (props: Props) => {
         background: theme.bg.bgPaper,
       }}
       alignItems="center"
+      data-qa-table-pagination
       display="flex"
       justifyContent="space-between"
-      data-qa-table-pagination
     >
       {!isShowingAll && (
         <PaginationControls

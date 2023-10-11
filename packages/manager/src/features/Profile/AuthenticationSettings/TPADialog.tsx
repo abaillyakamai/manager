@@ -1,5 +1,5 @@
 import { TPAProvider } from '@linode/api-v4/lib/profile';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { ActionsPanel } from 'src/components/ActionsPanel/ActionsPanel';

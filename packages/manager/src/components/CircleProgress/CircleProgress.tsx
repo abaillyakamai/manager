@@ -1,4 +1,4 @@
-import { SxProps, styled } from '@mui/material/styles';
+import { SxProps } from '@mui/material/styles';
 import * as React from 'react';
 
 import { Box } from 'src/components/Box';
@@ -7,6 +7,7 @@ import {
   CircularProgressProps,
 } from 'src/components/CircularProgress';
 import { isPropValid } from 'src/utilities/isPropValid';
+import { styled } from 'src/utilities/styled';
 
 interface CircleProgressProps extends CircularProgressProps {
   children?: JSX.Element;

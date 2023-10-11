@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import { makeStyles } from 'tss-react/mui';
 
 import UploadPending from 'src/assets/icons/uploadPending.svg';

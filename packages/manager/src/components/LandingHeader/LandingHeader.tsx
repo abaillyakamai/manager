@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
 
 import {
@@ -8,6 +8,7 @@ import {
 } from 'src/components/Breadcrumb/Breadcrumb';
 import { Button } from 'src/components/Button/Button';
 import { DocsLink } from 'src/components/DocsLink/DocsLink';
+import { styled } from 'src/utilities/styled';
 
 export interface LandingHeaderProps {
   analyticsLabel?: string;

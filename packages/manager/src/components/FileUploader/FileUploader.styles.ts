@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import { Button } from 'src/components/Button/Button';
 import { Typography } from 'src/components/Typography';

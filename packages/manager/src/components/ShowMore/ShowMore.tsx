@@ -1,8 +1,9 @@
 import Popover from '@mui/material/Popover';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
 
 import { Chip, ChipProps } from 'src/components/Chip';
+import { styled } from 'src/utilities/styled';
 
 interface ShowMoreProps<T> {
   ariaItemType: string;

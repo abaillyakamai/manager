@@ -1,13 +1,13 @@
-import { styled, useTheme } from '@mui/material/styles';
-import * as React from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
+import { useTheme } from '@mui/material/styles';
+import * as React from 'react';
 
 import { Paper } from 'src/components/Paper';
 import { isToday as _isToday } from 'src/utilities/isToday';
+import { styled } from 'src/utilities/styled';
 
 import { WithStartAndEnd } from '../../../request.types';
 import { TimeRangeSelect } from '../../../shared/TimeRangeSelect';
-
 import { StyledTypography } from '../CommonStyles.styles';
 import { CPUGraph } from './CPUGraph';
 import { DiskGraph } from './DiskGraph';
@@ -89,19 +89,19 @@ export const OverviewGraphs = (props: Props) => {
             justifyContent="space-between"
             spacing={4}
           >
-            <Grid sx={{ ...itemSpacing }} sm={6} xs={12}>
+            <Grid sm={6} sx={{ ...itemSpacing }} xs={12}>
               <CPUGraph {...graphProps} />
             </Grid>
-            <Grid sx={{ ...itemSpacing }} sm={6} xs={12}>
+            <Grid sm={6} sx={{ ...itemSpacing }} xs={12}>
               <MemoryGraph {...graphProps} />
             </Grid>
-            <Grid sx={{ ...itemSpacing }} sm={6} xs={12}>
+            <Grid sm={6} sx={{ ...itemSpacing }} xs={12}>
               <NetworkGraph {...graphProps} />
             </Grid>
-            <Grid sx={{ ...itemSpacing }} sm={6} xs={12}>
+            <Grid sm={6} sx={{ ...itemSpacing }} xs={12}>
               <DiskGraph {...graphProps} />
             </Grid>
-            <Grid sx={{ ...itemSpacing }} sm={6} xs={12}>
+            <Grid sm={6} sx={{ ...itemSpacing }} xs={12}>
               <LoadGraph {...graphProps} />
             </Grid>
           </Grid>
@@ -119,11 +119,11 @@ const StyledTimeRangeSelect = styled(TimeRangeSelect, {
 
 const StyledGrid = styled(Grid, { label: 'StyledGrid' })(({ theme }) => ({
   alignItems: 'center',
+  boxSizing: 'border-box',
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
   marginBottom: theme.spacing(1.25),
-  boxSizing: 'border-box',
 }));
 
 const itemSpacing = {

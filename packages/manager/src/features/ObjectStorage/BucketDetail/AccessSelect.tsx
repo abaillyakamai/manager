@@ -1,19 +1,20 @@
 import { ACLType } from '@linode/api-v4/lib/object-storage';
-import { Theme, styled } from '@mui/material/styles';
+import { Theme } from '@mui/material/styles';
 import * as React from 'react';
 
 import { ActionsPanel } from 'src/components/ActionsPanel/ActionsPanel';
 import { Button } from 'src/components/Button/Button';
 import { ConfirmationDialog } from 'src/components/ConfirmationDialog/ConfirmationDialog';
 import EnhancedSelect from 'src/components/EnhancedSelect';
+import { FormControlLabel } from 'src/components/FormControlLabel';
 import { Link } from 'src/components/Link';
 import { Notice } from 'src/components/Notice/Notice';
 import { Toggle } from 'src/components/Toggle';
 import { Typography } from 'src/components/Typography';
-import { FormControlLabel } from 'src/components/FormControlLabel';
 import { useOpenClose } from 'src/hooks/useOpenClose';
 import { capitalize } from 'src/utilities/capitalize';
 import { getErrorStringOrDefault } from 'src/utilities/errorUtils';
+import { styled } from 'src/utilities/styled';
 
 import { bucketACLOptions, objectACLOptions } from '../utilities';
 import { copy } from './AccessSelect.data';

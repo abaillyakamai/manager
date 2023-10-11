@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import { CopyTooltip } from 'src/components/CopyTooltip/CopyTooltip';
 import { isPropValid } from 'src/utilities/isPropValid';

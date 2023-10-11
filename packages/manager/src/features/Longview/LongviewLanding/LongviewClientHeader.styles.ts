@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 
 import { Button } from 'src/components/Button/Button';

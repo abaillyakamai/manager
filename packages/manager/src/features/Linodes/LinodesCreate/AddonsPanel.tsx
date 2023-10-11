@@ -1,5 +1,5 @@
 import { Interface, Linode } from '@linode/api-v4/lib/linodes';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -19,6 +19,7 @@ import { useImageQuery } from 'src/queries/images';
 import { CreateTypes } from 'src/store/linodeCreate/linodeCreate.actions';
 import { isFeatureEnabled } from 'src/utilities/accountCapabilities';
 import { privateIPRegex } from 'src/utilities/ipUtils';
+import { styled } from 'src/utilities/styled';
 
 import { AttachVLAN } from './AttachVLAN';
 import { UserDataAccordion } from './UserDataAccordion/UserDataAccordion';

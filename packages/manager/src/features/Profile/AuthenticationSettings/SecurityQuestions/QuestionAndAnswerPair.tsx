@@ -1,5 +1,5 @@
 import { SecurityQuestion } from '@linode/api-v4/lib/profile';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { Box } from 'src/components/Box';

@@ -1,5 +1,5 @@
 import _Divider, { DividerProps as _DividerProps } from '@mui/material/Divider';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { isPropValid } from 'src/utilities/isPropValid';

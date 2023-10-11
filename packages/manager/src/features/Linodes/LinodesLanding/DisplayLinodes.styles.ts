@@ -1,9 +1,8 @@
-import { styled } from '@mui/material/styles';
-
 import { IconButton } from 'src/components/IconButton';
 import { TableRow } from 'src/components/TableRow';
 import { Typography } from 'src/components/Typography';
 import { isPropValid } from 'src/utilities/isPropValid';
+import { styled } from 'src/utilities/styled';
 
 export const StyledTagHeaderRow = styled(TableRow, {
   label: 'StyledTagHeaderRow',
@@ -39,7 +38,7 @@ export const StyledControlHeader = styled('div', {
 
 export const StyledToggleButton = styled(IconButton, {
   label: 'StyledToggleButton',
-  shouldForwardProp: (prop) => isPropValid(['isActive'], prop),
+  shouldForwardProp: () => true,
 })<{ isActive: boolean }>(({ isActive, theme }) => ({
   '&.Mui-disabled': {
     display: 'none',

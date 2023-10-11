@@ -1,7 +1,7 @@
 import { PriceObject } from '@linode/api-v4';
 import { Region } from '@linode/api-v4/lib/regions';
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { Button } from 'src/components/Button/Button';

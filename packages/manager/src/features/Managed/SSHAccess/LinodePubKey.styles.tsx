@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Unstable_Grid2';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import SSHKeyIcon from 'src/assets/icons/ssh-key.svg';
 import { CircleProgress } from 'src/components/CircleProgress';

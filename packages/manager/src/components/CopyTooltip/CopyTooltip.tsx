@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import copy from 'copy-to-clipboard';
 import * as React from 'react';
 

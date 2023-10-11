@@ -1,5 +1,5 @@
 import _Paper, { PaperProps } from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { isPropValid } from 'src/utilities/isPropValid';

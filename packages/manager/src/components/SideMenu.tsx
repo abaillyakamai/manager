@@ -1,5 +1,5 @@
 import Drawer from '@mui/material/Drawer';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { Hidden } from 'src/components/Hidden';

@@ -1,4 +1,4 @@
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
 
 import LinodeIcon from 'src/assets/addnewmenu/linode.svg';
@@ -6,6 +6,7 @@ import { Button, ButtonProps } from 'src/components/Button/Button';
 import { H1Header } from 'src/components/H1Header/H1Header';
 import { Typography } from 'src/components/Typography';
 import { fadeIn } from 'src/styles/keyframes';
+import { styled } from 'src/utilities/styled';
 
 import { TransferDisplay } from '../TransferDisplay/TransferDisplay';
 

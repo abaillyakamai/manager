@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import StorageIcon from 'src/assets/icons/entityIcons/bucket.svg';

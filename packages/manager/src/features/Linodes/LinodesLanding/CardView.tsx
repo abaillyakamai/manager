@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Unstable_Grid2';
-import { keyframes, styled } from '@mui/material/styles';
+import { keyframes } from '@mui/material/styles';
 import * as React from 'react';
 
 import { TagDrawer, TagDrawerProps } from 'src/components/TagCell/TagDrawer';
@@ -7,6 +7,7 @@ import { Typography } from 'src/components/Typography';
 import { LinodeEntityDetail } from 'src/features/Linodes/LinodeEntityDetail';
 import { useLinodeUpdateMutation } from 'src/queries/linodes/linodes';
 import { useProfile } from 'src/queries/profile';
+import { styled } from 'src/utilities/styled';
 
 import { RenderLinodesProps } from './DisplayLinodes';
 
@@ -68,7 +69,7 @@ export const CardView = (props: RenderLinodesProps) => {
       <Grid className="m0" container style={{ width: '100%' }}>
         {data.map((linode, idx: number) => (
           <React.Fragment key={`linode-card-${idx}`}>
-            <StyledSummaryGrid xs={12} data-qa-linode-card={linode.id}>
+            <StyledSummaryGrid data-qa-linode-card={linode.id} xs={12}>
               <LinodeEntityDetail
                 handlers={{
                   onOpenDeleteDialog: () =>
@@ -123,7 +124,7 @@ const StyledSummaryGrid = styled(Grid, { label: 'StyledSummaryGrid' })(
     },
     backgroundColor: theme.palette.background.paper,
     marginBottom: 20,
-    paddingTop: 0, // from .py0 css class
     paddingBottom: 0,
+    paddingTop: 0, // from .py0 css class
   })
 );

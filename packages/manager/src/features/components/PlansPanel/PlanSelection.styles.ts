@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import { Chip } from 'src/components/Chip';
 import { TableCell } from 'src/components/TableCell';

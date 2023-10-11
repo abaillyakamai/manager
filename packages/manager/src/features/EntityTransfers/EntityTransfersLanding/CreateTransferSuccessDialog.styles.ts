@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import { CopyableTextField } from 'src/components/CopyableTextField/CopyableTextField';
 import { Dialog } from 'src/components/Dialog/Dialog';

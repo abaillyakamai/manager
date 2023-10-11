@@ -1,5 +1,5 @@
 import { StepConnector, StepIcon } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import { isPropValid } from 'src/utilities/isPropValid';
 

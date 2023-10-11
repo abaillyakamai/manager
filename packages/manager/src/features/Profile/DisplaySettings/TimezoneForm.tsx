@@ -1,4 +1,4 @@
-import { Theme, styled } from '@mui/material/styles';
+import { Theme } from '@mui/material/styles';
 import { DateTime } from 'luxon';
 import { useSnackbar } from 'notistack';
 import * as React from 'react';
@@ -10,6 +10,7 @@ import { CircleProgress } from 'src/components/CircleProgress';
 import Select, { Item } from 'src/components/EnhancedSelect/Select';
 import { Typography } from 'src/components/Typography';
 import { useMutateProfile, useProfile } from 'src/queries/profile';
+import { styled } from 'src/utilities/styled';
 
 interface Props {
   loggedInAsCustomer: boolean;

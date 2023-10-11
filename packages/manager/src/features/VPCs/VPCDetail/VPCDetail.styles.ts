@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 
 import { Box } from 'src/components/Box';
 import { Button } from 'src/components/Button/Button';

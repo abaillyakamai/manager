@@ -1,5 +1,5 @@
 import { IPAddress } from '@linode/api-v4/lib/networking';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import * as React from 'react';
 
 import { ActionsPanel } from 'src/components/ActionsPanel/ActionsPanel';

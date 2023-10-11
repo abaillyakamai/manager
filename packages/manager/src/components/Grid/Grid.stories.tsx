@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import { Box } from 'src/components/Box';
 import Paper from '@mui/material/Paper';
 import Grid2 from '@mui/material/Unstable_Grid2';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import React from 'react';
 
 import { Grid } from 'src/components/Grid';

@@ -2,7 +2,7 @@ import { Linode } from '@linode/api-v4';
 import { Region } from '@linode/api-v4/lib/regions';
 import Close from '@mui/icons-material/Close';
 import { Box, Stack } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled } from 'src/utilities/styled';
 import { action } from '@storybook/addon-actions';
 import React, { useState } from 'react';
 
