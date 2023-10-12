@@ -42,33 +42,35 @@ export interface ButtonProps extends _ButtonProps {
   tooltipText?: string;
 }
 
-const StyledButton = styled(_Button)<ButtonProps>(({ theme, ...props }) => ({
-  ...(props.buttonType === 'secondary' && {
-    color: theme.textColors.linkActiveLight,
-  }),
-  ...(props.compactX && {
-    minWidth: 50,
-    paddingLeft: 0,
-    paddingRight: 0,
-  }),
-  ...(props.compactY && {
-    minHeight: 20,
-    paddingBottom: 0,
-    paddingTop: 0,
-  }),
-  ...(props.loading && {
-    '& svg': {
-      animation: `${rotate360} 2s linear infinite`,
-      height: `${theme.spacing(2)}`,
-      margin: '0 auto',
-      width: `${theme.spacing(2)}`,
-    },
-    '&:disabled': {
-      backgroundColor:
-        props.buttonType === 'primary' && theme.palette.text.primary,
-    },
-  }),
-}));
+const StyledButton = styled(_Button)<ButtonProps>(({ theme, ...props }) => {
+  return {
+    ...(props.buttonType === 'secondary' && {
+      color: theme.textColors.linkActiveLight,
+    }),
+    ...(props.compactX && {
+      minWidth: 50,
+      paddingLeft: 0,
+      paddingRight: 0,
+    }),
+    ...(props.compactY && {
+      minHeight: 20,
+      paddingBottom: 0,
+      paddingTop: 0,
+    }),
+    ...(props.loading && {
+      '& svg': {
+        animation: `${rotate360} 2s linear infinite`,
+        height: `${theme.spacing(2)}`,
+        margin: '0 auto',
+        width: `${theme.spacing(2)}`,
+      },
+      '&:disabled': {
+        backgroundColor:
+          props.buttonType === 'primary' && theme.palette.text.primary,
+      },
+    }),
+  };
+});
 
 const Span = styled('span')({
   '@supports (-moz-appearance: none)': {

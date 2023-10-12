@@ -10,7 +10,23 @@ type StyledOptions = {
 export const styled = (tag: any, options?: StyledOptions) => {
   return _styled(tag, {
     shouldForwardProp: (prop: string) => {
-      return isPropValid(prop);
+      // console.log(prop, tag.propTypes);
+      // if (['classes', 'control', 'cx', 'sx'].includes(prop)) {
+      //   return true;
+      // }
+
+      // If component is a string, it's a DOM element
+      // In this case we only want to forward valid HTML props
+      if (typeof tag === 'string') {
+        // console.log('is string', prop, tag);
+        return isPropValid(prop);
+      }
+
+      if (tag?.propTypes && !(prop in tag.propTypes || isPropValid(prop))) {
+        return false;
+      }
+
+      return true;
     },
     ...options,
   });
