@@ -20,7 +20,6 @@ jobs:
       # TODO: Uncomment the following lines to enable coverage comment in part 2
       # It should work in theory, but want to limit the noise in everyone's PRs for now until
       # I can confirm the action works as expected
-      
       - name: Download base coverage artifact
         uses: dawidd6/action-download-artifact@268677152d06ba59fcec7a7f0b5d961b6ccd7e1e #v2.28.0
         with:
