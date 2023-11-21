@@ -58,11 +58,21 @@ jobs:
       - name: Run current branch coverage
         run: yarn coverage:summary
 
+      - name: Write PR number to an artifact
+        run: |
+          echo "${{ github.event.number }}" > pr_number.txt
+
       - name: Write current coverage to an artifact
         run: |
           coverage_json=$(cat ./packages/manager/coverage/coverage-summary.json)
           pct=$(echo "$coverage_json" | jq -r '.total.lines.pct')
           echo "$pct" > current_code_coverage.txt
+
+      - name: Upload PR number artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: pr_number
+          path: pr_number.txt
 
       - name: Upload current coverage artifact
         uses: actions/upload-artifact@v3

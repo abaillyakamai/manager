@@ -22,8 +22,13 @@ jobs:
         with:
           node-version: "18.14"
 
-      - name: Install dependencies
-        run: yarn
+
+      - name: Download PR number artifact
+        uses: dawidd6/action-download-artifact@268677152d06ba59fcec7a7f0b5d961b6ccd7e1e #v2.28.0
+        with:
+          workflow: "coverage.yml"
+          run_id: ${{ github.event.workflow_run.id }}
+          name: pr_number
 
       - name: Download base coverage artifact
         uses: dawidd6/action-download-artifact@268677152d06ba59fcec7a7f0b5d961b6ccd7e1e #v2.28.0
@@ -38,9 +43,6 @@ jobs:
           workflow: "coverage.yml"
           run_id: ${{ github.event.workflow_run.id }}
           name: current_code_coverage
-
-      - name: Update Coverage Badge
-        run: yarn coverage:badge
 
       - name: Generate Coverage Comment
         run: |
@@ -58,8 +60,9 @@ jobs:
       - name: Post Comment
         uses: mshick/add-pr-comment@7c0890544fb33b0bdd2e59467fbacb62e028a096 #v2.8.1
         with:
+          issue: cat pr_number.txt
           message: |
-            $(cat updated_comment.txt)
+            cat updated_comment.txt
 
       - name: Validate Coverage
         run: |
