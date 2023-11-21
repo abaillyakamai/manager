@@ -60,9 +60,9 @@ jobs:
       - name: Post Comment
         uses: mshick/add-pr-comment@7c0890544fb33b0bdd2e59467fbacb62e028a096 #v2.8.1
         with:
-          issue: cat pr_number.txt
+          issue: $(echo "$(cat pr_number.txt)")
           message: |
-            cat updated_comment.txt
+            $(echo "$(cat updated_comment.txt)")
 
       - name: Validate Coverage
         run: |
