@@ -22,7 +22,6 @@ jobs:
         with:
           node-version: "18.14"
 
-
       - name: Download PR number artifact
         uses: dawidd6/action-download-artifact@268677152d06ba59fcec7a7f0b5d961b6ccd7e1e #v2.28.0
         with:
@@ -43,6 +42,10 @@ jobs:
           workflow: "coverage.yml"
           run_id: ${{ github.event.workflow_run.id }}
           name: current_code_coverage
+      
+      - name: Set PR number Environment Variables
+        run: |
+            echo "PR_NUMBER=$(cat pr_number.txt)" >> $GITHUB_ENV
 
       - name: Generate Coverage Comment
         run: |
@@ -60,9 +63,8 @@ jobs:
       - name: Post Comment
         uses: mshick/add-pr-comment@7c0890544fb33b0bdd2e59467fbacb62e028a096 #v2.8.1
         with:
-          issue: $(echo "$(cat pr_number.txt)")
-          message: |
-            $(echo "$(cat updated_comment.txt)")
+          issue: ${{ env.PR_NUMBER }}
+          message-path: updated_comment.txt
 
       - name: Validate Coverage
         run: |
