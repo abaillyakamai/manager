@@ -6,7 +6,7 @@
 </h2>
 
 <p align="center">
-  <img alt="@Linode/Manager Coverage" src="./packages/manager/coverage/badges.svg" />
+  <img alt="Linode/Manager Coverage" src="./packages/manager/coverage/badges.svg" />
 </p>
 
 <p align="center">
