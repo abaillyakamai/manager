@@ -1,0 +1,30 @@
+name: Coverage Badge
+
+on:
+  push:
+    branches:
+      - develop
+      - staging
+      - master
+
+jobs:
+  generate-coverage-badge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js v18.14.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.14"
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run base branch coverage
+        run: yarn coverage:summary
+
+      - name: Generate coverage badge
+        run: coverage-badges --source ./packages/manager/coverage/coverage-summary.json --output ./packages/manager/coverage/badges.svg --label '@linode/manager coverage'
