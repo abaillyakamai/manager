@@ -30,4 +30,8 @@ jobs:
         run: yarn coverage:summary
 
       - name: Generate Coverage Badge
-        run: coverage-badges --source ./packages/manager/coverage/coverage-summary.json --output ./packages/manager/coverage/badges.svg --label '@linode/manager coverage'
+        uses: jaywcjlove/coverage-badges-cli@7f0781807ef3e7aba97a145beca881d36451b7b7 # v1.1.1
+        with:
+          label: '@linode/manager coverage'
+          source: ./packages/manager/coverage/coverage-summary.json
+          output: ./packages/manager/coverage/badges.svg
