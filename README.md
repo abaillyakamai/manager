@@ -9,7 +9,6 @@
   <img alt="Linode/Manager Coverage" src="./packages/manager/coverage/badges.svg" />
 </p>
 
-
 <p align="center">
   <a href="https://github.com/linode/manager/actions/workflows/ci.yml">
     <img src="https://github.com/linode/manager/actions/workflows/ci.yml/badge.svg?branch=develop" alt="CI Build Stats on develop" />
