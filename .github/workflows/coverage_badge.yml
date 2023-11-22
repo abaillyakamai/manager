@@ -35,3 +35,14 @@ jobs:
           label: '@linode/manager coverage'
           source: ./packages/manager/coverage/coverage-summary.json
           output: ./packages/manager/coverage/badges.svg
+
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_ENDPOINT: https://us-east-1.linodeobjects.com
+          AWS_S3_BUCKET: ${{ secrets.COVERAGE_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.COVERAGE_BUCKET_ACCESS }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.COVERAGE_BUCKET_SECRET }}
+          AWS_REGION: us-east-1
+          SOURCE_DIR: ./packages/manager/coverage
