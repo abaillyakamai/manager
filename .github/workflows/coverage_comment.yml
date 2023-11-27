@@ -42,7 +42,7 @@ jobs:
           workflow: "coverage.yml"
           run_id: ${{ github.event.workflow_run.id }}
           name: current_code_coverage
-      
+
       - name: Set PR Number Environment Variables
         run: |
             echo "PR_NUMBER=$(cat pr_number.txt)" >> $GITHUB_ENV
