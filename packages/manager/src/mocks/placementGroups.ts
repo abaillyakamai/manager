@@ -1,16 +1,18 @@
 import { rest } from 'msw';
 
 import { placementGroupFactory } from 'src/factories/placementGroups';
+
 import { makeResourcePage } from './serverHandlers';
-import { setMockData } from './store';
+import { handleGetMockStore, handlePostMockStore } from './store';
 
-import type { MockStoreFeature } from './store';
+import type { MockStoreFeature } from './store/types';
+import type { PlacementGroup } from '@linode/api-v4';
 
-const MOCK_STORAGE_FEATURE: MockStoreFeature = 'Placement Groups';
+const PG_MOCK_STORAGE_FEATURE: MockStoreFeature = 'Placement Groups';
 
 export const placementGroupsHandlers = [
   rest.get('*/placement/groups', (_req, res, ctx) => {
-    const payload = [
+    const initialData = [
       placementGroupFactory.build({
         id: 1,
         is_compliant: true,
@@ -26,18 +28,15 @@ export const placementGroupsHandlers = [
         is_compliant: false,
         label: 'pg-3',
       }),
-    ]
+    ];
 
-    setMockData({
-      feature: MOCK_STORAGE_FEATURE,
-      endpoint: 'get/placement/groups',
-      data: payload,
+    const { storedData } = handleGetMockStore({
+      feature: PG_MOCK_STORAGE_FEATURE,
+      initialData,
+      key: 'get:placement/groups',
     });
-    return res(
-      ctx.json(
-        makeResourcePage(payload)
-      )
-    );
+
+    return res(ctx.json(makeResourcePage(storedData)));
   }),
   rest.get('*/placement/groups/:placementGroupId', (req, res, ctx) => {
     if (req.params.placementGroupId === 'undefined') {
@@ -53,15 +52,15 @@ export const placementGroupsHandlers = [
     );
   }),
   rest.post('*/placement/groups', (req, res, ctx) => {
-    return res(
-      ctx.json({
-        ...placementGroupFactory.buildList(3),
-        ...placementGroupFactory.build({
-          ...(req.body as any),
-          id: 20,
-        }),
-      })
-    );
+    const { newItem } = handlePostMockStore({
+      feature: PG_MOCK_STORAGE_FEATURE,
+      key: 'get:placement/groups',
+      newItem: placementGroupFactory.build({
+        ...(req.body as PlacementGroup),
+      }),
+    });
+
+    return res(ctx.json(newItem));
   }),
   rest.put('*/placement/groups/:placementGroupId', (req, res, ctx) => {
     if (req.params.placementGroupId === '-1') {
@@ -191,4 +190,4 @@ export const placementGroupsHandlers = [
       return res(ctx.json(response));
     }
   ),
-]
+];

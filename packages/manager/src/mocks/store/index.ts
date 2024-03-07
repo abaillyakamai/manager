@@ -1,28 +1,55 @@
-import { getStorage, setStorage } from 'src/utilities/storage';
+import { getMockData, setMockData } from './utils';
 
-const MOCK_STORAGE_KEY = 'mockStoreData';
+import type { GetMockStore, PostMockStore } from './types';
 
-type MockStoreFeature = 'Placement Groups' | 'VPC'; // Add more features here as needed;
-
-interface MockStore {
-  feature: MockStoreFeature;
-  data: any;
-  endpoint: string;
-}
-
-export const setMockData = ({ feature, endpoint, data }: MockStore) => {
-  const mockStore = getStorage(MOCK_STORAGE_KEY);
-
-  setStorage(MOCK_STORAGE_KEY, {
-    ...mockStore,
-    [feature]: {
-      [endpoint]:
-        data
-    },
+export const handleGetMockStore = <Feature>({
+  feature,
+  initialData,
+  key,
+}: GetMockStore<Feature>) => {
+  let storedData = getMockData({
+    feature,
+    key,
   });
+
+  if (!storedData) {
+    setMockData({
+      data: initialData,
+      feature,
+      key,
+    });
+    storedData = initialData;
+  }
+
+  return { storedData };
 };
 
-export const getMockData = (key: string) => {
-  const storage = getStorage(MOCK_STORAGE_KEY);
-  return storage[key];
-}
+export const handlePostMockStore = <Feature>({
+  feature,
+  key,
+  newItem,
+}: PostMockStore<Feature>) => {
+  const storedData = getMockData({
+    feature,
+    key,
+  });
+
+  if (storedData) {
+    setMockData({
+      data: [...storedData, newItem],
+      feature,
+      key,
+    });
+  } else {
+    setMockData({
+      data: [newItem],
+      feature,
+      key,
+    });
+  }
+
+  const storedDataLength = storedData?.length || 0;
+  newItem['id'] = storedDataLength + 1;
+
+  return { newItem };
+};

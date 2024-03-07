@@ -96,7 +96,7 @@ import {
   volumeFactory,
   vpcFactory,
 } from 'src/factories';
-import { placementGroupsHandlers } from './placementGroups'
+import { placementGroupsHandlers } from './placementGroups';
 import { accountAgreementsFactory } from 'src/factories/accountAgreements';
 import { accountLoginFactory } from 'src/factories/accountLogin';
 import { accountUserFactory } from 'src/factories/accountUsers';
@@ -1284,9 +1284,9 @@ export const handlers = [
       headers.status === 'completed'
         ? accountMaintenanceFactory.buildList(30, { status: 'completed' })
         : [
-          ...accountMaintenanceFactory.buildList(90, { status: 'pending' }),
-          ...accountMaintenanceFactory.buildList(3, { status: 'started' }),
-        ];
+            ...accountMaintenanceFactory.buildList(90, { status: 'pending' }),
+            ...accountMaintenanceFactory.buildList(3, { status: 'started' }),
+          ];
 
     if (request.headers.get('x-filter')) {
       accountMaintenance.sort((a, b) => {
@@ -1491,9 +1491,9 @@ export const handlers = [
       const grantsResponse = grantsFactory.build({
         global: parentAccountNonAdminUser.restricted
           ? {
-            cancel_account: false,
-            child_account_access: true,
-          }
+              cancel_account: false,
+              child_account_access: true,
+            }
           : undefined,
       });
       return HttpResponse.json(grantsResponse);
