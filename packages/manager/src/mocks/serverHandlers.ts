@@ -1,5 +1,4 @@
 import {
-  CreatePlacementGroupPayload,
   NotificationType,
   ObjectStorageKeyRequest,
   SecurityQuestionsPayload,
@@ -26,7 +25,6 @@ import {
   configurationFactory,
   configurationsEndpointHealthFactory,
   contactFactory,
-  createPlacementGroupPayloadFactory,
   createRouteFactory,
   createServiceTargetFactory,
   credentialFactory,
@@ -79,7 +77,6 @@ import {
   objectStorageKeyFactory,
   paymentFactory,
   paymentMethodFactory,
-  placementGroupFactory,
   possibleMySQLReplicationTypes,
   possiblePostgresReplicationTypes,
   proDedicatedTypeFactory,
@@ -99,6 +96,7 @@ import {
   volumeFactory,
   vpcFactory,
 } from 'src/factories';
+import { placementGroupsHandlers } from './placementGroups'
 import { accountAgreementsFactory } from 'src/factories/accountAgreements';
 import { accountLoginFactory } from 'src/factories/accountLogin';
 import { accountUserFactory } from 'src/factories/accountUsers';
@@ -1286,9 +1284,9 @@ export const handlers = [
       headers.status === 'completed'
         ? accountMaintenanceFactory.buildList(30, { status: 'completed' })
         : [
-            ...accountMaintenanceFactory.buildList(90, { status: 'pending' }),
-            ...accountMaintenanceFactory.buildList(3, { status: 'started' }),
-          ];
+          ...accountMaintenanceFactory.buildList(90, { status: 'pending' }),
+          ...accountMaintenanceFactory.buildList(3, { status: 'started' }),
+        ];
 
     if (request.headers.get('x-filter')) {
       accountMaintenance.sort((a, b) => {
@@ -1493,9 +1491,9 @@ export const handlers = [
       const grantsResponse = grantsFactory.build({
         global: parentAccountNonAdminUser.restricted
           ? {
-              cancel_account: false,
-              child_account_access: true,
-            }
+            cancel_account: false,
+            child_account_access: true,
+          }
           : undefined,
       });
       return HttpResponse.json(grantsResponse);
@@ -2060,170 +2058,10 @@ export const handlers = [
       }),
     ]);
   }),
-
-  // Placement Groups
-  http.get('*/placement/groups', () => {
-    return HttpResponse.json(
-      makeResourcePage(placementGroupFactory.buildList(3))
-    );
-  }),
-  http.get('*/placement/groups/:placementGroupId', ({ params }) => {
-    if (params.placementGroupId === 'undefined') {
-      return HttpResponse.json({}, { status: 404 });
-    }
-
-    return HttpResponse.json(
-      placementGroupFactory.build({
-        id: 1,
-      })
-    );
-  }),
-  http.post<any, CreatePlacementGroupPayload>(
-    '*/placement/groups',
-    async ({ request }) => {
-      const body = await request.json();
-
-      return HttpResponse.json(createPlacementGroupPayloadFactory.build(body));
-    }
-  ),
-  http.put(
-    '*/placement/groups/:placementGroupId',
-    async ({ params, request }) => {
-      const body = await request.json();
-
-      if (params.placementGroupId === '-1') {
-        return HttpResponse.json({}, { status: 404 });
-      }
-
-      const response = placementGroupFactory.build({
-        ...(body as any),
-      });
-
-      return HttpResponse.json(response);
-    }
-  ),
-  http.delete('*/placement/groups/:placementGroupId', ({ params }) => {
-    if (params.placementGroupId === '-1') {
-      return HttpResponse.json({}, { status: 404 });
-    }
-
-    return HttpResponse.json({});
-  }),
-  http.post(
-    '*/placement/groups/:placementGroupId/assign',
-    async ({ params, request }) => {
-      const body = await request.json();
-
-      if (params.placementGroupId === '-1') {
-        return HttpResponse.json({}, { status: 404 });
-      }
-
-      const response = placementGroupFactory.build({
-        affinity_type: 'anti_affinity',
-        id: Number(params.placementGroupId) ?? -1,
-        label: 'pg-1',
-        linodes: [
-          {
-            is_compliant: true,
-            linode: 1,
-          },
-          {
-            is_compliant: true,
-            linode: 2,
-          },
-          {
-            is_compliant: true,
-            linode: 3,
-          },
-          {
-            is_compliant: true,
-            linode: 4,
-          },
-          {
-            is_compliant: true,
-            linode: 5,
-          },
-          {
-            is_compliant: true,
-            linode: 6,
-          },
-          {
-            is_compliant: true,
-            linode: 7,
-          },
-          {
-            is_compliant: true,
-            linode: 8,
-          },
-          {
-            is_compliant: false,
-            linode: 43,
-          },
-          {
-            is_compliant: true,
-            linode: (body as any).linodes[0],
-          },
-        ],
-      });
-
-      return HttpResponse.json(response);
-    }
-  ),
-  http.post('*/placement/groups/:placementGroupId/unassign', ({ params }) => {
-    if (params.placementGroupId === '-1') {
-      return HttpResponse.json({}, { status: 404 });
-    }
-
-    const response = placementGroupFactory.build({
-      affinity_type: 'anti_affinity',
-      id: Number(params.placementGroupId) ?? -1,
-      label: 'pg-1',
-      linodes: [
-        {
-          is_compliant: true,
-          linode: 1,
-        },
-
-        {
-          is_compliant: true,
-          linode: 2,
-        },
-        {
-          is_compliant: true,
-          linode: 3,
-        },
-        {
-          is_compliant: true,
-          linode: 4,
-        },
-        {
-          is_compliant: true,
-          linode: 5,
-        },
-        {
-          is_compliant: true,
-          linode: 6,
-        },
-        {
-          is_compliant: true,
-          linode: 7,
-        },
-        {
-          is_compliant: true,
-          linode: 8,
-        },
-        {
-          is_compliant: false,
-          linode: 43,
-        },
-      ],
-    });
-
-    return HttpResponse.json(response);
-  }),
   ...entityTransfers,
   ...statusPage,
   ...databases,
   ...aclb,
   ...vpc,
+  ...placementGroupsHandlers
 ];
