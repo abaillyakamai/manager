@@ -16,10 +16,11 @@ export interface GetMockStoreEntity<FeatureEntity> extends BaseMockStore {
   entityId: FeatureEntity;
 }
 
-export interface PostMockStore<FeatureEntity> extends BaseMockStore {
-  newEntity: FeatureEntity;
+export interface CreateMockStoreEntity<FeatureEntity> extends BaseMockStore {
+  payload: FeatureEntity;
 }
 
 export interface PutMockStore<FeatureEntity> extends BaseMockStore {
-  updatedEntity: FeatureEntity;
+  entityId: number;
+  payload: FeatureEntity;
 }

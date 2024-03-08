@@ -1,9 +1,9 @@
 import { getMockData, setMockData } from './utils';
 
 import type {
+  CreateMockStoreEntity,
   GetMockStoreEntities,
   GetMockStoreEntity,
-  PostMockStore,
   PutMockStore,
 } from './types';
 
@@ -53,8 +53,8 @@ export const getMockStoreEntity = <FeatureEntity>({
 export const createMockStoreEntity = <FeatureEntity>({
   feature,
   key,
-  newEntity,
-}: PostMockStore<FeatureEntity>) => {
+  payload,
+}: CreateMockStoreEntity<FeatureEntity>) => {
   const storedEntities: FeatureEntity[] = getMockData({
     feature,
     key,
@@ -62,44 +62,55 @@ export const createMockStoreEntity = <FeatureEntity>({
 
   if (storedEntities) {
     setMockData({
-      data: [...storedEntities, newEntity],
+      data: [...storedEntities, payload],
       feature,
       key,
     });
   } else {
     setMockData({
-      data: [newEntity],
+      data: [payload],
       feature,
       key,
     });
   }
 
   const storedDataLength = storedEntities?.length || 0;
-  newEntity['id'] = storedDataLength + 1;
+  payload['id'] = storedDataLength + 1;
 
-  return { entity: newEntity };
+  return { entity: payload };
 };
 
 export const updateMockStoreEntity = <FeatureEntity>({
+  entityId,
   feature,
   key,
-  updatedEntity,
+  payload,
 }: PutMockStore<FeatureEntity>) => {
-  const storedData: FeatureEntity[] = getMockData({
+  const storedEntities: FeatureEntity[] = getMockData({
     feature,
     key,
   });
+  const entityIndex = storedEntities.findIndex(
+    (storedEntity: FeatureEntity) => storedEntity['id'] === entityId
+  );
 
-  if (storedData) {
-    const updatedData = storedData.filter(
-      (entity: FeatureEntity) => entity['id'] === updatedEntity['id']
-    );
-    setMockData({
-      data: updatedData,
-      feature,
-      key,
-    });
+  if (entityIndex === -1) {
+    return { entity: null };
   }
+
+  const updatedEntity = {
+    ...storedEntities[entityIndex],
+    ...payload,
+  };
+
+  const updatedEntities = [...storedEntities];
+  updatedEntities[entityIndex] = updatedEntity;
+
+  setMockData({
+    data: updatedEntities,
+    feature,
+    key,
+  });
 
   return { entity: updatedEntity };
 };

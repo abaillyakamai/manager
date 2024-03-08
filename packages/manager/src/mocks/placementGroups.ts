@@ -54,7 +54,7 @@ export const placementGroupsHandlers = [
     const { entity: newPlacementGroup } = createMockStoreEntity({
       feature: PG_MOCK_STORAGE_FEATURE,
       key: PLACEMENT_GROUPS_DISPLAY,
-      newEntity: newPG,
+      payload: newPG,
     });
 
     return res(ctx.json(newPlacementGroup));
@@ -77,17 +77,14 @@ export const placementGroupsHandlers = [
       return res(ctx.status(404));
     }
 
-    const updatedPlacementGroup = placementGroupFactory.build({
-      ...(req.body as PlacementGroup),
-    });
-
-    const { entity: updatedEntity } = updateMockStoreEntity({
+    const { entity: updatedPlacementGroup } = updateMockStoreEntity({
+      entityId: Number(req.params.placementGroupId),
       feature: PG_MOCK_STORAGE_FEATURE,
       key: PLACEMENT_GROUPS_DISPLAY,
-      updatedEntity: updatedPlacementGroup,
+      payload: req.body as PlacementGroup,
     });
 
-    return res(ctx.json(updatedEntity));
+    return res(ctx.json(updatedPlacementGroup));
   }),
   rest.delete('*/placement/groups/:placementGroupId', (req, res, ctx) => {
     if (req.params.placementGroupId === '-1') {
