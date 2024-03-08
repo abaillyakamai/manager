@@ -4,10 +4,23 @@ const MOCK_STORAGE_KEY = 'mockStoreData';
 
 import type { MockStore } from './types';
 
+export const getMockData = <FeatureEntity>({
+  featureKey,
+  queryKey,
+}: Omit<MockStore<FeatureEntity>, 'data'>) => {
+  const mockStore = getStorage(MOCK_STORAGE_KEY);
+
+  if (!mockStore) {
+    return;
+  }
+
+  return mockStore[featureKey][queryKey];
+};
+
 export const setMockData = <FeatureEntity>({
   data,
-  feature,
-  key,
+  featureKey,
+  queryKey,
 }: MockStore<FeatureEntity>) => {
   let mockStore = getStorage(MOCK_STORAGE_KEY);
 
@@ -17,24 +30,11 @@ export const setMockData = <FeatureEntity>({
 
   const updatedMockStore = {
     ...mockStore,
-    [feature]: {
-      ...mockStore[feature],
-      [key]: data,
+    [featureKey]: {
+      ...mockStore[featureKey],
+      [queryKey]: data,
     },
   };
 
   setStorage(MOCK_STORAGE_KEY, JSON.stringify(updatedMockStore));
-};
-
-export const getMockData = <FeatureEntity>({
-  feature,
-  key,
-}: Omit<MockStore<FeatureEntity>, 'data'>) => {
-  const mockStore = getStorage(MOCK_STORAGE_KEY);
-
-  if (!mockStore) {
-    return;
-  }
-
-  return mockStore[feature][key];
 };

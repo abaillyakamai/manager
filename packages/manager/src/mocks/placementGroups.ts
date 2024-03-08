@@ -5,6 +5,7 @@ import { placementGroupFactory } from 'src/factories/placementGroups';
 import { makeResourcePage } from './serverHandlers';
 import {
   createMockStoreEntity,
+  deleteMockStoreEntity,
   getMockStoreEntities,
   getMockStoreEntity,
   updateMockStoreEntity,
@@ -13,7 +14,7 @@ import {
 import type { MockStoreFeature } from './store/types';
 import type { PlacementGroup } from '@linode/api-v4';
 
-const PG_MOCK_STORAGE_FEATURE: MockStoreFeature = 'Placement Groups';
+const PG_MOCK_STORAGE_FEATURE_KEY: MockStoreFeature = 'Placement Groups';
 const PLACEMENT_GROUPS_DISPLAY = 'placement-groups-list';
 
 export const placementGroupsHandlers = [
@@ -37,9 +38,9 @@ export const placementGroupsHandlers = [
     ];
 
     const { entities: placementGroups } = getMockStoreEntities({
-      feature: PG_MOCK_STORAGE_FEATURE,
+      featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
       initialEntities: initialPlacementGroups,
-      key: PLACEMENT_GROUPS_DISPLAY,
+      queryKey: PLACEMENT_GROUPS_DISPLAY,
     });
 
     return res(ctx.json(makeResourcePage(placementGroups)));
@@ -52,9 +53,9 @@ export const placementGroupsHandlers = [
     });
 
     const { entity: newPlacementGroup } = createMockStoreEntity({
-      feature: PG_MOCK_STORAGE_FEATURE,
-      key: PLACEMENT_GROUPS_DISPLAY,
+      featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
       payload: newPG,
+      queryKey: PLACEMENT_GROUPS_DISPLAY,
     });
 
     return res(ctx.json(newPlacementGroup));
@@ -66,8 +67,8 @@ export const placementGroupsHandlers = [
 
     const { entity: placementGroup } = getMockStoreEntity({
       entityId: Number(req.params.placementGroupId),
-      feature: PG_MOCK_STORAGE_FEATURE,
-      key: PLACEMENT_GROUPS_DISPLAY,
+      featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
+      queryKey: PLACEMENT_GROUPS_DISPLAY,
     });
 
     return res(ctx.json(placementGroup));
@@ -79,9 +80,9 @@ export const placementGroupsHandlers = [
 
     const { entity: updatedPlacementGroup } = updateMockStoreEntity({
       entityId: Number(req.params.placementGroupId),
-      feature: PG_MOCK_STORAGE_FEATURE,
-      key: PLACEMENT_GROUPS_DISPLAY,
+      featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
       payload: req.body as PlacementGroup,
+      queryKey: PLACEMENT_GROUPS_DISPLAY,
     });
 
     return res(ctx.json(updatedPlacementGroup));
@@ -90,6 +91,12 @@ export const placementGroupsHandlers = [
     if (req.params.placementGroupId === '-1') {
       return res(ctx.status(404));
     }
+
+    deleteMockStoreEntity({
+      entityId: Number(req.params.placementGroupId),
+      featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
+      queryKey: PLACEMENT_GROUPS_DISPLAY,
+    });
 
     return res(ctx.json({}));
   }),

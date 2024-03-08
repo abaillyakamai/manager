@@ -2,115 +2,169 @@ import { getMockData, setMockData } from './utils';
 
 import type {
   CreateMockStoreEntity,
+  DeleteMockStoreEntity,
   GetMockStoreEntities,
   GetMockStoreEntity,
-  PutMockStore,
+  PutMockStoreEntity,
 } from './types';
 
 export const getMockStoreEntities = <FeatureEntity>({
-  feature,
+  featureKey,
   initialEntities,
-  key,
+  queryKey,
 }: GetMockStoreEntities<FeatureEntity>) => {
-  let storedEntities: FeatureEntity[] = getMockData({
-    feature,
-    key,
-  });
-
-  if (!storedEntities) {
-    setMockData({
-      data: initialEntities,
-      feature,
-      key,
+  try {
+    let storedEntities: FeatureEntity[] = getMockData({
+      featureKey,
+      queryKey,
     });
-    storedEntities = initialEntities;
-  }
 
-  return { entities: storedEntities };
+    if (!storedEntities) {
+      setMockData({
+        data: initialEntities,
+        featureKey,
+        queryKey,
+      });
+      storedEntities = initialEntities;
+    }
+
+    return { entities: storedEntities ?? initialEntities };
+  } catch (e) {
+    throw new Error(
+      `Failed to fetch entities. Please try again later. Error: ${e}`
+    );
+  }
 };
 
 export const getMockStoreEntity = <FeatureEntity>({
   entityId,
-  feature,
-  key,
+  featureKey,
+  queryKey,
 }: GetMockStoreEntity<FeatureEntity>) => {
-  const storedEntities: FeatureEntity[] = getMockData({
-    feature,
-    key,
-  });
+  try {
+    const storedEntities: FeatureEntity[] = getMockData({
+      featureKey,
+      queryKey,
+    });
 
-  if (!entityId) {
-    return { entity: null };
+    if (!entityId) {
+      return { entity: null };
+    }
+
+    const entityMatch = storedEntities.find(
+      (storedEntity: FeatureEntity) => storedEntity['id'] === entityId
+    );
+
+    return { entity: entityMatch ?? null };
+  } catch (e) {
+    throw new Error(
+      `Failed to fetch entity. Please try again later. Error: ${e}`
+    );
   }
-
-  const entityMatch = storedEntities.find(
-    (storedEntity: FeatureEntity) => storedEntity['id'] === entityId
-  );
-
-  return { entity: entityMatch };
 };
 
 export const createMockStoreEntity = <FeatureEntity>({
-  feature,
-  key,
+  featureKey,
   payload,
+  queryKey,
 }: CreateMockStoreEntity<FeatureEntity>) => {
-  const storedEntities: FeatureEntity[] = getMockData({
-    feature,
-    key,
-  });
+  try {
+    const storedEntities: FeatureEntity[] = getMockData({
+      featureKey,
+      queryKey,
+    });
 
-  if (storedEntities) {
-    setMockData({
-      data: [...storedEntities, payload],
-      feature,
-      key,
-    });
-  } else {
-    setMockData({
-      data: [payload],
-      feature,
-      key,
-    });
+    if (storedEntities) {
+      setMockData({
+        data: [...storedEntities, payload],
+        featureKey,
+        queryKey,
+      });
+    } else {
+      setMockData({
+        data: [payload],
+        featureKey,
+        queryKey,
+      });
+    }
+
+    const storedDataLength = storedEntities?.length || 0;
+    payload['id'] = storedDataLength + 1;
+
+    return { entity: payload ?? null };
+  } catch (e) {
+    throw new Error(
+      `Failed to create entity. Please try again later. Error: ${e}`
+    );
   }
-
-  const storedDataLength = storedEntities?.length || 0;
-  payload['id'] = storedDataLength + 1;
-
-  return { entity: payload };
 };
 
 export const updateMockStoreEntity = <FeatureEntity>({
   entityId,
-  feature,
-  key,
+  featureKey,
   payload,
-}: PutMockStore<FeatureEntity>) => {
-  const storedEntities: FeatureEntity[] = getMockData({
-    feature,
-    key,
-  });
-  const entityIndex = storedEntities.findIndex(
-    (storedEntity: FeatureEntity) => storedEntity['id'] === entityId
-  );
+  queryKey,
+}: PutMockStoreEntity<FeatureEntity>) => {
+  try {
+    const storedEntities: FeatureEntity[] = getMockData({
+      featureKey,
+      queryKey,
+    });
+    const entityIndex = storedEntities.findIndex(
+      (storedEntity: FeatureEntity) => storedEntity['id'] === entityId
+    );
 
-  if (entityIndex === -1) {
-    return { entity: null };
+    if (entityIndex === -1) {
+      return { entity: null };
+    }
+
+    const updatedEntity = {
+      ...storedEntities[entityIndex],
+      ...payload,
+    };
+
+    const updatedEntities = [...storedEntities];
+    updatedEntities[entityIndex] = updatedEntity;
+
+    setMockData({
+      data: updatedEntities,
+      featureKey,
+      queryKey,
+    });
+
+    return { entity: updatedEntity ?? null };
+  } catch (e) {
+    throw new Error(
+      `Failed to update entity. Please try again later. Error: ${e}`
+    );
   }
+};
 
-  const updatedEntity = {
-    ...storedEntities[entityIndex],
-    ...payload,
-  };
+export const deleteMockStoreEntity = <FeatureEntity>({
+  entityId,
+  featureKey,
+  queryKey,
+}: DeleteMockStoreEntity) => {
+  try {
+    const storedEntities: FeatureEntity[] = getMockData({
+      featureKey,
+      queryKey,
+    });
 
-  const updatedEntities = [...storedEntities];
-  updatedEntities[entityIndex] = updatedEntity;
+    const updatedEntities = storedEntities.filter(
+      (storedEntity: FeatureEntity) => storedEntity['id'] !== entityId
+    );
 
-  setMockData({
-    data: updatedEntities,
-    feature,
-    key,
-  });
+    setMockData({
+      data: updatedEntities,
+      featureKey,
+      queryKey,
+    });
 
-  return { entity: updatedEntity };
+    return { entity: null };
+  } catch (e) {
+    throw new Error(
+      `Failed to delete entity. Please try again later. Error: ${e}`
+    );
+  }
 };

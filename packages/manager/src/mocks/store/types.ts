@@ -1,26 +1,30 @@
 export type MockStoreFeature = 'Placement Groups' | 'VPC'; // Add more features here as needed;
 
 type BaseMockStore = {
-  feature: MockStoreFeature;
-  key: string;
+  featureKey: MockStoreFeature;
+  queryKey: string;
 };
-export interface MockStore<FeatureEntity> extends BaseMockStore {
-  data: FeatureEntity[];
+export interface MockStore<Feature> extends BaseMockStore {
+  data: Feature[];
 }
 
-export interface GetMockStoreEntities<FeatureEntity> extends BaseMockStore {
-  initialEntities: FeatureEntity[];
+export interface GetMockStoreEntities<Feature> extends BaseMockStore {
+  initialEntities: Feature[];
 }
 
-export interface GetMockStoreEntity<FeatureEntity> extends BaseMockStore {
-  entityId: FeatureEntity;
+export interface GetMockStoreEntity<Feature> extends BaseMockStore {
+  entityId: Feature;
 }
 
-export interface CreateMockStoreEntity<FeatureEntity> extends BaseMockStore {
-  payload: FeatureEntity;
+export interface CreateMockStoreEntity<Feature> extends BaseMockStore {
+  payload: Feature;
 }
 
-export interface PutMockStore<FeatureEntity> extends BaseMockStore {
+export interface PutMockStoreEntity<Feature> extends BaseMockStore {
   entityId: number;
-  payload: FeatureEntity;
+  payload: Feature;
+}
+
+export interface DeleteMockStoreEntity extends BaseMockStore {
+  entityId: number;
 }
