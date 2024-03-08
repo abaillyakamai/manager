@@ -1,55 +1,105 @@
 import { getMockData, setMockData } from './utils';
 
-import type { GetMockStore, PostMockStore } from './types';
+import type {
+  GetMockStoreEntities,
+  GetMockStoreEntity,
+  PostMockStore,
+  PutMockStore,
+} from './types';
 
-export const handleGetMockStore = <Feature>({
+export const getMockStoreEntities = <FeatureEntity>({
   feature,
-  initialData,
+  initialEntities,
   key,
-}: GetMockStore<Feature>) => {
-  let storedData = getMockData({
+}: GetMockStoreEntities<FeatureEntity>) => {
+  let storedEntities: FeatureEntity[] = getMockData({
     feature,
     key,
   });
 
-  if (!storedData) {
+  if (!storedEntities) {
     setMockData({
-      data: initialData,
+      data: initialEntities,
       feature,
       key,
     });
-    storedData = initialData;
+    storedEntities = initialEntities;
   }
 
-  return { storedData };
+  return { entities: storedEntities };
 };
 
-export const handlePostMockStore = <Feature>({
+export const getMockStoreEntity = <FeatureEntity>({
+  entityId,
   feature,
   key,
-  newItem,
-}: PostMockStore<Feature>) => {
-  const storedData = getMockData({
+}: GetMockStoreEntity<FeatureEntity>) => {
+  const storedEntities: FeatureEntity[] = getMockData({
     feature,
     key,
   });
 
-  if (storedData) {
+  if (!entityId) {
+    return { entity: null };
+  }
+
+  const entityMatch = storedEntities.find(
+    (storedEntity: FeatureEntity) => storedEntity['id'] === entityId
+  );
+
+  return { entity: entityMatch };
+};
+
+export const createMockStoreEntity = <FeatureEntity>({
+  feature,
+  key,
+  newEntity,
+}: PostMockStore<FeatureEntity>) => {
+  const storedEntities: FeatureEntity[] = getMockData({
+    feature,
+    key,
+  });
+
+  if (storedEntities) {
     setMockData({
-      data: [...storedData, newItem],
+      data: [...storedEntities, newEntity],
       feature,
       key,
     });
   } else {
     setMockData({
-      data: [newItem],
+      data: [newEntity],
       feature,
       key,
     });
   }
 
-  const storedDataLength = storedData?.length || 0;
-  newItem['id'] = storedDataLength + 1;
+  const storedDataLength = storedEntities?.length || 0;
+  newEntity['id'] = storedDataLength + 1;
 
-  return { newItem };
+  return { entity: newEntity };
+};
+
+export const updateMockStoreEntity = <FeatureEntity>({
+  feature,
+  key,
+  updatedEntity,
+}: PutMockStore<FeatureEntity>) => {
+  const storedData: FeatureEntity[] = getMockData({
+    feature,
+    key,
+  });
+
+  if (storedData) {
+    const updatedData = storedData.filter(
+      (entity: FeatureEntity) => entity['id'] === updatedEntity['id']
+    );
+    setMockData({
+      data: updatedData,
+      feature,
+      key,
+    });
+  }
+
+  return { entity: updatedEntity };
 };

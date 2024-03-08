@@ -3,16 +3,22 @@ import { rest } from 'msw';
 import { placementGroupFactory } from 'src/factories/placementGroups';
 
 import { makeResourcePage } from './serverHandlers';
-import { handleGetMockStore, handlePostMockStore } from './store';
+import {
+  createMockStoreEntity,
+  getMockStoreEntities,
+  getMockStoreEntity,
+  updateMockStoreEntity,
+} from './store';
 
 import type { MockStoreFeature } from './store/types';
 import type { PlacementGroup } from '@linode/api-v4';
 
 const PG_MOCK_STORAGE_FEATURE: MockStoreFeature = 'Placement Groups';
+const PLACEMENT_GROUPS_DISPLAY = 'placement-groups-list';
 
 export const placementGroupsHandlers = [
   rest.get('*/placement/groups', (_req, res, ctx) => {
-    const initialData = [
+    const initialPlacementGroups = [
       placementGroupFactory.build({
         id: 1,
         is_compliant: true,
@@ -30,48 +36,58 @@ export const placementGroupsHandlers = [
       }),
     ];
 
-    const { storedData } = handleGetMockStore({
+    const { entities: placementGroups } = getMockStoreEntities({
       feature: PG_MOCK_STORAGE_FEATURE,
-      initialData,
-      key: 'get:placement/groups',
+      initialEntities: initialPlacementGroups,
+      key: PLACEMENT_GROUPS_DISPLAY,
     });
 
-    return res(ctx.json(makeResourcePage(storedData)));
+    return res(ctx.json(makeResourcePage(placementGroups)));
+  }),
+  rest.post('*/placement/groups', (req, res, ctx) => {
+    const newPG = placementGroupFactory.build({
+      ...(req.body as PlacementGroup),
+      is_compliant: true,
+      linodes: [],
+    });
+
+    const { entity: newPlacementGroup } = createMockStoreEntity({
+      feature: PG_MOCK_STORAGE_FEATURE,
+      key: PLACEMENT_GROUPS_DISPLAY,
+      newEntity: newPG,
+    });
+
+    return res(ctx.json(newPlacementGroup));
   }),
   rest.get('*/placement/groups/:placementGroupId', (req, res, ctx) => {
-    if (req.params.placementGroupId === 'undefined') {
+    if (req.params.placementGroupId === '-1') {
       return res(ctx.status(404));
     }
 
-    return res(
-      ctx.json(
-        placementGroupFactory.build({
-          id: 4,
-        })
-      )
-    );
-  }),
-  rest.post('*/placement/groups', (req, res, ctx) => {
-    const { newItem } = handlePostMockStore({
+    const { entity: placementGroup } = getMockStoreEntity({
+      entityId: Number(req.params.placementGroupId),
       feature: PG_MOCK_STORAGE_FEATURE,
-      key: 'get:placement/groups',
-      newItem: placementGroupFactory.build({
-        ...(req.body as PlacementGroup),
-      }),
+      key: PLACEMENT_GROUPS_DISPLAY,
     });
 
-    return res(ctx.json(newItem));
+    return res(ctx.json(placementGroup));
   }),
   rest.put('*/placement/groups/:placementGroupId', (req, res, ctx) => {
     if (req.params.placementGroupId === '-1') {
       return res(ctx.status(404));
     }
 
-    const response = placementGroupFactory.build({
-      ...(req.body as any),
+    const updatedPlacementGroup = placementGroupFactory.build({
+      ...(req.body as PlacementGroup),
     });
 
-    return res(ctx.json(response));
+    const { entity: updatedEntity } = updateMockStoreEntity({
+      feature: PG_MOCK_STORAGE_FEATURE,
+      key: PLACEMENT_GROUPS_DISPLAY,
+      updatedEntity: updatedPlacementGroup,
+    });
+
+    return res(ctx.json(updatedEntity));
   }),
   rest.delete('*/placement/groups/:placementGroupId', (req, res, ctx) => {
     if (req.params.placementGroupId === '-1') {

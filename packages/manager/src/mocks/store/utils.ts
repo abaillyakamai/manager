@@ -4,11 +4,11 @@ const MOCK_STORAGE_KEY = 'mockStoreData';
 
 import type { MockStore } from './types';
 
-export const setMockData = <Feature>({
+export const setMockData = <FeatureEntity>({
   data,
   feature,
   key,
-}: MockStore<Feature>) => {
+}: MockStore<FeatureEntity>) => {
   let mockStore = getStorage(MOCK_STORAGE_KEY);
 
   if (!mockStore) {
@@ -26,10 +26,10 @@ export const setMockData = <Feature>({
   setStorage(MOCK_STORAGE_KEY, JSON.stringify(updatedMockStore));
 };
 
-export const getMockData = <Feature>({
+export const getMockData = <FeatureEntity>({
   feature,
   key,
-}: Omit<MockStore<Feature>, 'data'>) => {
+}: Omit<MockStore<FeatureEntity>, 'data'>) => {
   const mockStore = getStorage(MOCK_STORAGE_KEY);
 
   if (!mockStore) {

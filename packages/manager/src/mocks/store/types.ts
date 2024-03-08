@@ -4,14 +4,22 @@ type BaseMockStore = {
   feature: MockStoreFeature;
   key: string;
 };
-export interface MockStore<Feature> extends BaseMockStore {
-  data: Feature[];
+export interface MockStore<FeatureEntity> extends BaseMockStore {
+  data: FeatureEntity[];
 }
 
-export interface GetMockStore<Feature> extends BaseMockStore {
-  initialData: Feature[];
+export interface GetMockStoreEntities<FeatureEntity> extends BaseMockStore {
+  initialEntities: FeatureEntity[];
 }
 
-export interface PostMockStore<Feature> extends BaseMockStore {
-  newItem: Feature;
+export interface GetMockStoreEntity<FeatureEntity> extends BaseMockStore {
+  entityId: FeatureEntity;
+}
+
+export interface PostMockStore<FeatureEntity> extends BaseMockStore {
+  newEntity: FeatureEntity;
+}
+
+export interface PutMockStore<FeatureEntity> extends BaseMockStore {
+  updatedEntity: FeatureEntity;
 }
