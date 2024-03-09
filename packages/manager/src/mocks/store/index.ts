@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { getMockData, setMockData } from './utils';
 
 import type {
@@ -55,7 +57,7 @@ export const getMockStoreEntity = <FeatureEntity>({
       (storedEntity: FeatureEntity) => storedEntity['id'] === entityId
     );
 
-    return { entity: entityMatch ?? null };
+    return { entity: entityMatch };
   } catch (e) {
     throw new Error(
       `Failed to fetch entity. Please try again later. Error: ${e}`
@@ -100,6 +102,7 @@ export const createMockStoreEntity = <FeatureEntity>({
 };
 
 export const updateMockStoreEntity = <FeatureEntity>({
+  deepMerge = true,
   entityId,
   featureKey,
   payload,
@@ -118,10 +121,21 @@ export const updateMockStoreEntity = <FeatureEntity>({
       return { entity: null };
     }
 
-    const updatedEntity = {
-      ...storedEntities[entityIndex],
-      ...payload,
-    };
+    const updatedEntity = deepMerge
+      ? _.mergeWith(
+          storedEntities[entityIndex],
+          payload,
+          (objValue, srcValue) => {
+            if (_.isArray(objValue)) {
+              return objValue.concat(srcValue);
+            }
+            return objValue;
+          }
+        )
+      : {
+          ...storedEntities[entityIndex],
+          ...payload,
+        };
 
     const updatedEntities = [...storedEntities];
     updatedEntities[entityIndex] = updatedEntity;

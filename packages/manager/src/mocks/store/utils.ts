@@ -1,8 +1,8 @@
 import { getStorage, setStorage } from 'src/utilities/storage';
 
-const MOCK_STORAGE_KEY = 'mockStoreData';
-
 import type { MockStore } from './types';
+
+const MOCK_STORAGE_KEY = 'mockStoreData';
 
 export const getMockData = <FeatureEntity>({
   featureKey,

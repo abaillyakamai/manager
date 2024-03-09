@@ -15,7 +15,7 @@ import type { MockStoreFeature } from './store/types';
 import type { PlacementGroup } from '@linode/api-v4';
 
 const PG_MOCK_STORAGE_FEATURE_KEY: MockStoreFeature = 'Placement Groups';
-const PLACEMENT_GROUPS_DISPLAY = 'placement-groups-list';
+const PLACEMENT_GROUPS = 'placement-groups-list';
 
 export const placementGroupsHandlers = [
   rest.get('*/placement/groups', (_req, res, ctx) => {
@@ -37,10 +37,10 @@ export const placementGroupsHandlers = [
       }),
     ];
 
-    const { entities: placementGroups } = getMockStoreEntities({
+    const { entities: placementGroups } = getMockStoreEntities<PlacementGroup>({
       featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
       initialEntities: initialPlacementGroups,
-      queryKey: PLACEMENT_GROUPS_DISPLAY,
+      queryKey: PLACEMENT_GROUPS,
     });
 
     return res(ctx.json(makeResourcePage(placementGroups)));
@@ -52,11 +52,13 @@ export const placementGroupsHandlers = [
       linodes: [],
     });
 
-    const { entity: newPlacementGroup } = createMockStoreEntity({
-      featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
-      payload: newPG,
-      queryKey: PLACEMENT_GROUPS_DISPLAY,
-    });
+    const { entity: newPlacementGroup } = createMockStoreEntity<PlacementGroup>(
+      {
+        featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
+        payload: newPG,
+        queryKey: PLACEMENT_GROUPS,
+      }
+    );
 
     return res(ctx.json(newPlacementGroup));
   }),
@@ -65,10 +67,10 @@ export const placementGroupsHandlers = [
       return res(ctx.status(404));
     }
 
-    const { entity: placementGroup } = getMockStoreEntity({
+    const { entity: placementGroup } = getMockStoreEntity<PlacementGroup>({
       entityId: Number(req.params.placementGroupId),
       featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
-      queryKey: PLACEMENT_GROUPS_DISPLAY,
+      queryKey: PLACEMENT_GROUPS,
     });
 
     return res(ctx.json(placementGroup));
@@ -78,11 +80,13 @@ export const placementGroupsHandlers = [
       return res(ctx.status(404));
     }
 
-    const { entity: updatedPlacementGroup } = updateMockStoreEntity({
+    const {
+      entity: updatedPlacementGroup,
+    } = updateMockStoreEntity<PlacementGroup>({
       entityId: Number(req.params.placementGroupId),
       featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
-      payload: req.body as PlacementGroup,
-      queryKey: PLACEMENT_GROUPS_DISPLAY,
+      payload: req.body as any,
+      queryKey: PLACEMENT_GROUPS,
     });
 
     return res(ctx.json(updatedPlacementGroup));
@@ -95,7 +99,7 @@ export const placementGroupsHandlers = [
     deleteMockStoreEntity({
       entityId: Number(req.params.placementGroupId),
       featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
-      queryKey: PLACEMENT_GROUPS_DISPLAY,
+      queryKey: PLACEMENT_GROUPS,
     });
 
     return res(ctx.json({}));
@@ -105,55 +109,23 @@ export const placementGroupsHandlers = [
       return res(ctx.status(404));
     }
 
-    const response = placementGroupFactory.build({
-      affinity_type: 'anti_affinity',
-      id: Number(req.params.placementGroupId) ?? -1,
-      label: 'pg-1',
-      linodes: [
-        {
-          is_compliant: true,
-          linode: 1,
-        },
-        {
-          is_compliant: true,
-          linode: 2,
-        },
-        {
-          is_compliant: true,
-          linode: 3,
-        },
-        {
-          is_compliant: true,
-          linode: 4,
-        },
-        {
-          is_compliant: true,
-          linode: 5,
-        },
-        {
-          is_compliant: true,
-          linode: 6,
-        },
-        {
-          is_compliant: true,
-          linode: 7,
-        },
-        {
-          is_compliant: true,
-          linode: 8,
-        },
-        {
-          is_compliant: false,
-          linode: 43,
-        },
-        {
-          is_compliant: true,
-          linode: (req.body as any).linodes[0],
-        },
-      ],
+    const { entity: updatedPlacementGroupLinodes } = updateMockStoreEntity<
+      Partial<PlacementGroup>
+    >({
+      entityId: Number(req.params.placementGroupId),
+      featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
+      payload: {
+        linodes: [
+          {
+            is_compliant: true,
+            linode: (req.body as Record<string, any>)?.linodes[0] as any,
+          },
+        ],
+      },
+      queryKey: PLACEMENT_GROUPS,
     });
 
-    return res(ctx.json(response));
+    return res(ctx.json(updatedPlacementGroupLinodes));
   }),
   rest.post(
     '*/placement/groups/:placementGroupId/unassign',
@@ -162,52 +134,28 @@ export const placementGroupsHandlers = [
         return res(ctx.status(404));
       }
 
-      const response = placementGroupFactory.build({
-        affinity_type: 'anti_affinity',
-        id: Number(req.params.placementGroupId) ?? -1,
-        label: 'pg-1',
-        linodes: [
-          {
-            is_compliant: true,
-            linode: 1,
-          },
-
-          {
-            is_compliant: true,
-            linode: 2,
-          },
-          {
-            is_compliant: true,
-            linode: 3,
-          },
-          {
-            is_compliant: true,
-            linode: 4,
-          },
-          {
-            is_compliant: true,
-            linode: 5,
-          },
-          {
-            is_compliant: true,
-            linode: 6,
-          },
-          {
-            is_compliant: true,
-            linode: 7,
-          },
-          {
-            is_compliant: true,
-            linode: 8,
-          },
-          {
-            is_compliant: false,
-            linode: 43,
-          },
-        ],
+      const { entity: originalEntity } = getMockStoreEntity<PlacementGroup>({
+        entityId: Number(req.params.placementGroupId),
+        featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
+        queryKey: PLACEMENT_GROUPS,
       });
 
-      return res(ctx.json(response));
+      const { entity: updatedPlacementGroupLinodes } = updateMockStoreEntity<
+        Partial<PlacementGroup>
+      >({
+        deepMerge: false,
+        entityId: Number(req.params.placementGroupId),
+        featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
+        payload: {
+          linodes: originalEntity?.linodes.filter(
+            (linode) =>
+              linode.linode !== (req.body as Record<string, any>)?.linodes[0]
+          ),
+        },
+        queryKey: PLACEMENT_GROUPS,
+      });
+
+      return res(ctx.json(updatedPlacementGroupLinodes));
     }
   ),
 ];

@@ -36,7 +36,7 @@ export const PlacementGroupsUnassignModal = (props: Props) => {
   );
 
   const payload: UnassignLinodesFromPlacementGroupPayload = {
-    linodes: [+linodeId ?? -1],
+    linodes: [+linodeId],
   };
 
   const onUnassign = async () => {

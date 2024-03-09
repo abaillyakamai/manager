@@ -30,26 +30,6 @@ export const placementGroupFactory = Factory.Sync.makeFactory<PlacementGroup>({
       is_compliant: true,
       linode: 5,
     },
-    {
-      is_compliant: true,
-      linode: 6,
-    },
-    {
-      is_compliant: true,
-      linode: 7,
-    },
-    {
-      is_compliant: true,
-      linode: 8,
-    },
-    {
-      is_compliant: true,
-      linode: 9,
-    },
-    {
-      is_compliant: false,
-      linode: 43,
-    },
   ],
   region: 'us-east',
 });

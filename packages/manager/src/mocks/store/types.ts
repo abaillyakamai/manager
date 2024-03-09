@@ -13,7 +13,7 @@ export interface GetMockStoreEntities<Feature> extends BaseMockStore {
 }
 
 export interface GetMockStoreEntity<Feature> extends BaseMockStore {
-  entityId: Feature;
+  entityId: number;
 }
 
 export interface CreateMockStoreEntity<Feature> extends BaseMockStore {
@@ -21,6 +21,7 @@ export interface CreateMockStoreEntity<Feature> extends BaseMockStore {
 }
 
 export interface PutMockStoreEntity<Feature> extends BaseMockStore {
+  deepMerge?: boolean;
   entityId: number;
   payload: Feature;
 }
