@@ -129,7 +129,7 @@ export const updateMockStoreEntity = <FeatureEntity>({
             if (_.isArray(objValue)) {
               return objValue.concat(srcValue);
             }
-            return objValue;
+            return srcValue;
           }
         )
       : {
