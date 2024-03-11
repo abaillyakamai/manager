@@ -1,16 +1,25 @@
 import { nullable, oneOf, primaryKey } from '@mswjs/data';
 
+import { mswUUID } from '../utils';
+
+const LinodePlacementGroupModel = {
+  affinity_type: String,
+  id: primaryKey(() => mswUUID()),
+  is_strict: Boolean,
+  label: String,
+};
+
 const LinodeModel = {
   alerts: Array,
   backups: Array,
   group: String,
   hypervisor: String,
-  id: primaryKey(Number),
+  id: primaryKey(() => mswUUID()),
   image: nullable(String),
   ipv4: Array,
   ipv6: Array,
   label: String,
-  placement_group: nullable(oneOf('placementGroup')),
+  placement_group: nullable(oneOf('linodePlacementGroup')),
   region: String,
   specs: Array,
   status: String,
@@ -20,4 +29,4 @@ const LinodeModel = {
   watchdog_enabled: Boolean,
 };
 
-export { LinodeModel };
+export { LinodeModel, LinodePlacementGroupModel };

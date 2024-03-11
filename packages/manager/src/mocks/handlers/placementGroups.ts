@@ -8,23 +8,54 @@ import type {
   UpdatePlacementGroupPayload,
 } from '@linode/api-v4';
 
-[1, 2, 3].forEach((_, idx) => {
-  const placementGroupLinode = mswDB.placementGroupLinodes.create({
-    id: idx + 1,
-    is_compliant: true,
-    // linode: 1,
+// Create a placement group with 0 linodes
+mswDB.placementGroup.create({
+  affinity_type: 'anti_affinity',
+  is_compliant: true,
+  is_strict: true,
+  label: `PG-1`,
+  linodes: [],
+  region: 'region1',
+});
+
+// Create a linode and a placement group with 1 linode
+const linode1 = mswDB.linode.create({
+  label: `linode-1`,
+});
+
+const placementGroupLinode1 = mswDB.placementGroupLinodes.create({
+  is_compliant: true,
+  linode: linode1,
+});
+
+mswDB.placementGroup.create({
+  affinity_type: 'anti_affinity',
+  is_compliant: true,
+  is_strict: true,
+  label: `PG-2`,
+  linodes: [placementGroupLinode1],
+  region: 'region2',
+});
+
+// Create 9 linodes and a placement group with 9 linodes
+const linodes = Array.from({ length: 9 }, (_, idx) => {
+  const linode = mswDB.linode.create({
+    label: `linode-${idx + 2}`,
   });
 
-  const placementGroup = {
-    affinity_type: 'anti_affinity',
-    id: idx + 1,
+  return mswDB.placementGroupLinodes.create({
     is_compliant: true,
-    is_strict: true,
-    label: `PG-${idx + 1}`,
-    linodes: [placementGroupLinode],
-  };
+    linode,
+  });
+});
 
-  mswDB.placementGroup.create(placementGroup);
+mswDB.placementGroup.create({
+  affinity_type: 'anti_affinity',
+  is_compliant: true,
+  is_strict: true,
+  label: `PG-3`,
+  linodes,
+  region: 'region3',
 });
 
 export const placementGroups = [
@@ -41,7 +72,7 @@ export const placementGroups = [
         mswDB.placementGroup.findFirst({
           where: {
             id: {
-              equals: Number(req.params.placementGroupId[0]),
+              equals: Number(req.params.placementGroupId),
             },
           },
         })
@@ -66,7 +97,7 @@ export const placementGroups = [
       },
       where: {
         id: {
-          equals: Number(req.params.placementGroupId[0]),
+          equals: Number(req.params.placementGroupId),
         },
       },
     });
@@ -81,7 +112,7 @@ export const placementGroups = [
     mswDB.placementGroup.delete({
       where: {
         id: {
-          equals: Number(req.params.placementGroupId[0]),
+          equals: Number(req.params.placementGroupId),
         },
       },
     });
