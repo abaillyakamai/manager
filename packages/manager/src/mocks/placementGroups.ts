@@ -1,4 +1,4 @@
-import { rest } from 'msw';
+import { HttpResponse, http } from 'msw';
 
 import { placementGroupFactory } from 'src/factories/placementGroups';
 
@@ -18,7 +18,7 @@ const PG_MOCK_STORAGE_FEATURE_KEY: MockStoreFeature = 'Placement Groups';
 const PLACEMENT_GROUPS = 'placement-groups-list';
 
 export const placementGroupsHandlers = [
-  rest.get('*/placement/groups', (_req, res, ctx) => {
+  http.get('*/placement/groups', () => {
     const initialPlacementGroups = [
       placementGroupFactory.build({
         id: 1,
@@ -43,11 +43,11 @@ export const placementGroupsHandlers = [
       queryKey: PLACEMENT_GROUPS,
     });
 
-    return res(ctx.json(makeResourcePage(placementGroups)));
+    return HttpResponse.json(makeResourcePage(placementGroups));
   }),
-  rest.post('*/placement/groups', (req, res, ctx) => {
+  http.post('*/placement/groups', ({ request }) => {
     const newPG = placementGroupFactory.build({
-      ...(req.body as PlacementGroup),
+      ...(request.body as any),
       is_compliant: true,
       linodes: [],
     });
@@ -60,82 +60,85 @@ export const placementGroupsHandlers = [
       }
     );
 
-    return res(ctx.json(newPlacementGroup));
+    return HttpResponse.json(newPlacementGroup);
   }),
-  rest.get('*/placement/groups/:placementGroupId', (req, res, ctx) => {
-    if (req.params.placementGroupId === '-1') {
-      return res(ctx.status(404));
+  http.get('*/placement/groups/:placementGroupId', ({ params }) => {
+    if (params.placementGroupId === '-1') {
+      return HttpResponse.json({}, { status: 404 });
     }
 
     const { entity: placementGroup } = getMockStoreEntity<PlacementGroup>({
-      entityId: Number(req.params.placementGroupId),
+      entityId: Number(params.placementGroupId),
       featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
       queryKey: PLACEMENT_GROUPS,
     });
 
-    return res(ctx.json(placementGroup));
+    return HttpResponse.json(placementGroup);
   }),
-  rest.put('*/placement/groups/:placementGroupId', (req, res, ctx) => {
-    if (req.params.placementGroupId === '-1') {
-      return res(ctx.status(404));
+  http.put('*/placement/groups/:placementGroupId', ({ params, request }) => {
+    if (params.placementGroupId === '-1') {
+      return HttpResponse.json({}, { status: 404 });
     }
 
     const {
       entity: updatedPlacementGroup,
     } = updateMockStoreEntity<PlacementGroup>({
-      entityId: Number(req.params.placementGroupId),
+      entityId: Number(params.placementGroupId),
       featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
-      payload: req.body as any,
+      payload: request.body as any,
       queryKey: PLACEMENT_GROUPS,
     });
 
-    return res(ctx.json(updatedPlacementGroup));
+    return HttpResponse.json(updatedPlacementGroup);
   }),
-  rest.delete('*/placement/groups/:placementGroupId', (req, res, ctx) => {
-    if (req.params.placementGroupId === '-1') {
-      return res(ctx.status(404));
+  http.delete('*/placement/groups/:placementGroupId', ({ params }) => {
+    if (params.placementGroupId === '-1') {
+      return HttpResponse.json({}, { status: 404 });
     }
 
     deleteMockStoreEntity({
-      entityId: Number(req.params.placementGroupId),
+      entityId: Number(params.placementGroupId),
       featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
       queryKey: PLACEMENT_GROUPS,
     });
 
-    return res(ctx.json({}));
+    return HttpResponse.json({});
   }),
-  rest.post('*/placement/groups/:placementGroupId/assign', (req, res, ctx) => {
-    if (req.params.placementGroupId === '-1') {
-      return res(ctx.status(404));
+  http.post(
+    '*/placement/groups/:placementGroupId/assign',
+    ({ params, request }) => {
+      if (params.placementGroupId === '-1') {
+        return HttpResponse.json({}, { status: 404 });
+      }
+
+      const { entity: updatedPlacementGroupLinodes } = updateMockStoreEntity<
+        Partial<PlacementGroup>
+      >({
+        entityId: Number(params.placementGroupId),
+        featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
+        payload: {
+          linodes: [
+            {
+              is_compliant: true,
+              linode: (request.body as Record<string, any>)?.linodes[0] as any,
+            },
+          ],
+        },
+        queryKey: PLACEMENT_GROUPS,
+      });
+
+      return HttpResponse.json(updatedPlacementGroupLinodes);
     }
-
-    const { entity: updatedPlacementGroupLinodes } = updateMockStoreEntity<
-      Partial<PlacementGroup>
-    >({
-      entityId: Number(req.params.placementGroupId),
-      featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
-      payload: {
-        linodes: [
-          {
-            is_compliant: true,
-            linode: (req.body as Record<string, any>)?.linodes[0] as any,
-          },
-        ],
-      },
-      queryKey: PLACEMENT_GROUPS,
-    });
-
-    return res(ctx.json(updatedPlacementGroupLinodes));
-  }),
-  rest.post(
+  ),
+  http.post(
     '*/placement/groups/:placementGroupId/unassign',
-    (req, res, ctx) => {
-      if (req.params.placementGroupId === '-1') {
-        return res(ctx.status(404));
+    ({ params, request }) => {
+      if (params.placementGroupId === '-1') {
+        return HttpResponse.json({}, { status: 404 });
       }
 
       const { entity: originalEntity } = getMockStoreEntity<PlacementGroup>({
-        entityId: Number(req.params.placementGroupId),
+        entityId: Number(params.placementGroupId),
         featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
         queryKey: PLACEMENT_GROUPS,
       });
@@ -144,18 +147,19 @@ export const placementGroupsHandlers = [
         Partial<PlacementGroup>
       >({
         deepMerge: false,
-        entityId: Number(req.params.placementGroupId),
+        entityId: Number(params.placementGroupId),
         featureKey: PG_MOCK_STORAGE_FEATURE_KEY,
         payload: {
           linodes: originalEntity?.linodes.filter(
             (linode) =>
-              linode.linode !== (req.body as Record<string, any>)?.linodes[0]
+              linode.linode !==
+              (request.body as Record<string, any>)?.linodes[0]
           ),
         },
         queryKey: PLACEMENT_GROUPS,
       });
 
-      return res(ctx.json(updatedPlacementGroupLinodes));
+      return HttpResponse.json(updatedPlacementGroupLinodes);
     }
   ),
 ];
