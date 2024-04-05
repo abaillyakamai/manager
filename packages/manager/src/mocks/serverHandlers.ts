@@ -104,8 +104,6 @@ import { grantFactory, grantsFactory } from 'src/factories/grants';
 import { pickRandom } from 'src/utilities/random';
 import { getStorage } from 'src/utilities/storage';
 
-import { placementGroups } from './handlers/placementGroups';
-
 export const makeResourcePage = <T>(
   e: T[],
   override: { page: number; pages: number; results?: number } = {
@@ -2080,5 +2078,4 @@ export const handlers = [
   ...databases,
   ...aclb,
   ...vpc,
-  ...placementGroups,
 ];
