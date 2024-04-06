@@ -104,6 +104,9 @@ import { grantFactory, grantsFactory } from 'src/factories/grants';
 import { pickRandom } from 'src/utilities/random';
 import { getStorage } from 'src/utilities/storage';
 
+import { dbHandlers } from './db';
+import { mswDB } from './db';
+
 export const makeResourcePage = <T>(
   e: T[],
   override: { page: number; pages: number; results?: number } = {
@@ -2073,9 +2076,13 @@ export const handlers = [
       }),
     ]);
   }),
+  http.get('*placement/groups', () => {
+    return HttpResponse.json(makeResourcePage(mswDB.placementGroup.getAll()));
+  }),
   ...entityTransfers,
   ...statusPage,
   ...databases,
   ...aclb,
   ...vpc,
+  ...dbHandlers,
 ];

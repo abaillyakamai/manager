@@ -5,7 +5,7 @@ import { mswUUID } from '../utils';
 const PlacementGroupLinodesModel = {
   id: primaryKey(() => mswUUID()),
   is_compliant: Boolean,
-  linode: oneOf('linode'),
+  linode_id: oneOf('linode'),
 };
 
 const PlacementGroupModel = {
@@ -14,7 +14,7 @@ const PlacementGroupModel = {
   is_compliant: Boolean,
   is_strict: Boolean,
   label: String,
-  linodes: manyOf('placementGroupLinodes'),
+  members: manyOf('placementGroupLinodes'),
   region: String,
 };
 

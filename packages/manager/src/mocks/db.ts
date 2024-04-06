@@ -5,6 +5,7 @@ import {
   PlacementGroupLinodesModel,
   PlacementGroupModel,
 } from './models/PlacementGroup';
+import { seedPlacementGroupsData } from './seeds/placementGroups';
 
 export const mswDB = factory({
   linode: LinodeModel,
@@ -12,3 +13,10 @@ export const mswDB = factory({
   placementGroup: PlacementGroupModel,
   placementGroupLinodes: PlacementGroupLinodesModel,
 });
+
+export const dbHandlers = [
+  ...mswDB.placementGroup.toHandlers('rest'),
+  ...mswDB.placementGroupLinodes.toHandlers('rest'),
+];
+
+seedPlacementGroupsData();
