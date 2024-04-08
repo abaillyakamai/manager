@@ -10,6 +10,7 @@ export const seedPlacementGroupsData = () => {
     linodeFactory.build({
       label: `pg-linode-1`,
       placement_group: undefined,
+      region: 'eu-west',
     })
   );
 
@@ -51,6 +52,17 @@ export const seedPlacementGroupsData = () => {
   const db_Pg1 = mswDB.placementGroup.create({ ...pg1 });
   const db_Pg2 = mswDB.placementGroup.create({ ...pg2 });
   mswDB.placementGroup.create({ ...pg3 });
+  // Seeding additional Linodes to add to Placement Groups
+  Array.from({ length: 4 }, (_, idx) => {
+    const linode = convertToMswContent(
+      linodeFactory.build({
+        label: `pg-linode-${idx + 2}`,
+        placement_group: undefined,
+        region: 'eu-west',
+      })
+    );
+    return mswDB.linode.create(linode);
+  });
 
   // Create initial relationships
   mswDB.linode.update({
