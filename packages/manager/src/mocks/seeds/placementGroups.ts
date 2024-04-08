@@ -20,7 +20,7 @@ export const seedPlacementGroupsData = () => {
       is_strict: true,
       label: `pg-1`,
       members: [],
-      region: 'region1',
+      region: 'eu-west',
     })
   );
 
@@ -31,7 +31,7 @@ export const seedPlacementGroupsData = () => {
       is_strict: true,
       label: `pg-2`,
       members: [],
-      region: 'region2',
+      region: 'eu-west',
     })
   );
 
@@ -42,7 +42,7 @@ export const seedPlacementGroupsData = () => {
       is_strict: false,
       label: `pg-3`,
       members: [],
-      region: 'region3',
+      region: 'eu-west',
     })
   );
 

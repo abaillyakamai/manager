@@ -9,7 +9,6 @@ import {
 import { DateTime } from 'luxon';
 import { HttpResponse, http } from 'msw';
 
-import { regions } from 'src/__data__/regionsData';
 import { MOCK_THEME_STORAGE_KEY } from 'src/dev-tools/ThemeSelector';
 import {
   VLANFactory,
@@ -601,7 +600,8 @@ export const handlers = [
     }
   ),
   http.get('*/regions', async () => {
-    return HttpResponse.json(makeResourcePage(regions));
+    const dbRegions = mswDB.region.getAll();
+    return HttpResponse.json(makeResourcePage(dbRegions));
   }),
   http.get('*/images', async () => {
     const privateImages = imageFactory.buildList(5, {
@@ -2076,23 +2076,6 @@ export const handlers = [
         region: 'us-east',
       }),
     ]);
-  }),
-  http.get('*placement/groups', () => {
-    return HttpResponse.json(
-      makeResourcePage(
-        mswDB.placementGroup.getAll().map((pg) => {
-          return {
-            ...pg,
-            members: pg.members.map((m) => {
-              return {
-                is_compliant: true,
-                linode_id: m.id,
-              };
-            }),
-          };
-        })
-      )
-    );
   }),
   ...entityTransfers,
   ...statusPage,
