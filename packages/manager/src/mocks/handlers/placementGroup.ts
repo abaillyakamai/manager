@@ -84,7 +84,13 @@ export const placementGroups = [
       const pg = mswDB.placementGroup.update({
         data: {
           members: (_, pg) => {
-            return [...getPGMembers(pg), ...(body as any)];
+            return [
+              ...getPGMembers(pg),
+              {
+                is_compliant: true,
+                linode_id: (body as any).linodes[0],
+              },
+            ];
           },
         },
         where: {
