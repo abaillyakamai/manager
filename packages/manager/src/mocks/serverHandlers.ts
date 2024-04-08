@@ -104,8 +104,8 @@ import { grantFactory, grantsFactory } from 'src/factories/grants';
 import { pickRandom } from 'src/utilities/random';
 import { getStorage } from 'src/utilities/storage';
 
-import { dbHandlers } from './db';
 import { mswDB } from './db';
+import { placementGroups } from './handlers/placementGroup';
 
 export const makeResourcePage = <T>(
   e: T[],
@@ -740,6 +740,7 @@ export const handlers = [
       }),
       eventLinode,
       multipleIPLinode,
+      ...mswDB.linode.getAll(),
     ];
 
     if (request.headers.get('x-filter')) {
@@ -2077,12 +2078,26 @@ export const handlers = [
     ]);
   }),
   http.get('*placement/groups', () => {
-    return HttpResponse.json(makeResourcePage(mswDB.placementGroup.getAll()));
+    return HttpResponse.json(
+      makeResourcePage(
+        mswDB.placementGroup.getAll().map((pg) => {
+          return {
+            ...pg,
+            members: pg.members.map((m) => {
+              return {
+                is_compliant: true,
+                linode_id: m.id,
+              };
+            }),
+          };
+        })
+      )
+    );
   }),
   ...entityTransfers,
   ...statusPage,
   ...databases,
   ...aclb,
   ...vpc,
-  ...dbHandlers,
+  ...placementGroups,
 ];
