@@ -12,7 +12,7 @@ interface MswContent<T> {
 export const convertToMswContent = <T>(entity: EntityType): MswContent<T> => {
   return {
     ...entity,
-    id: entity.id,
+    id: mswUUID(),
   };
 };
 

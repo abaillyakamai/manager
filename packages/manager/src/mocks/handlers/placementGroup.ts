@@ -79,18 +79,19 @@ export const placementGroups = [
   http.post(
     '*/placement/groups/:placementGroupId/assign',
     async ({ params, request }) => {
-      const body = await request.json();
+      const body = (await request.json()) as any;
       const pgId = Number(params.placementGroupId);
       const pg = mswDB.placementGroup.update({
         data: {
-          members: (_, pg) => {
+          members: (_, _pg) => {
             return [
-              ...getPGMembers(pg),
-              {
-                is_compliant: true,
-                linode_id: (body as any).linodes[0],
-              },
-            ];
+              ..._pg.members,
+              mswDB.linode.findFirst({
+                where: {
+                  id: { equals: body.linodes[0] },
+                },
+              }),
+            ] as any;
           },
         },
         where: {

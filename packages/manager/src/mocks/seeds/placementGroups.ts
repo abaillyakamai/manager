@@ -49,7 +49,7 @@ export const seedPlacementGroupsData = () => {
 
   // Create initial data
   const db_Linode1 = mswDB.linode.create({ ...linode1 });
-  const db_Pg1 = mswDB.placementGroup.create({ ...pg1 });
+  mswDB.placementGroup.create({ ...pg1 });
   const db_Pg2 = mswDB.placementGroup.create({ ...pg2 });
   mswDB.placementGroup.create({ ...pg3 });
   // Seeding additional Linodes to add to Placement Groups
@@ -65,15 +65,6 @@ export const seedPlacementGroupsData = () => {
   });
 
   // Create initial relationships
-  mswDB.linode.update({
-    data: {
-      placement_group: db_Pg1,
-    },
-    where: {
-      id: { equals: db_Linode1.id },
-    },
-  });
-
   mswDB.placementGroup.update({
     data: {
       members: [db_Linode1],

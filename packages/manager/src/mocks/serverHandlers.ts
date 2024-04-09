@@ -746,20 +746,26 @@ export const handlers = [
     if (request.headers.get('x-filter')) {
       const headers = JSON.parse(request.headers.get('x-filter') || '{}');
       const orFilters = headers['+or'];
+      const regionFilter = headers['region'];
 
       if (orFilters) {
         const filteredLinodes = linodes.filter((linode) => {
           const filteredById = orFilters.some(
             (filter: { id: number }) => filter.id === linode.id
           );
-          const filteredByRegion = orFilters.some(
-            (filter: { region: string }) => filter.region === linode.region
-          );
 
-          return (filteredById || filteredByRegion) ?? linodes;
+          return filteredById ?? linodes;
         });
 
         return HttpResponse.json(makeResourcePage(filteredLinodes));
+      }
+
+      if (regionFilter) {
+        const filteredLinodes = linodes.filter(
+          (linode) => linode.region === regionFilter
+        );
+
+        return HttpResponse.json(makeResourcePage(filteredLinodes ?? linodes));
       }
     }
     return HttpResponse.json(makeResourcePage(linodes));
