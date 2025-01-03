@@ -54,7 +54,7 @@ export const SideMenu = (props: SideMenuProps) => {
           />
         </StyledDrawer>
       </Hidden>
-      <Hidden implementation="css" mdDown>
+      <Hidden mdDown>
         <StyledDrawer
           collapse={collapse}
           data-testid="side-menu"
@@ -82,15 +82,20 @@ const StyledDrawer = styled(Drawer, {
     height: '100%',
     left: 'inherit',
     overflowX: 'hidden',
+    position: 'relative',
     [theme.breakpoints.up('md')]: {
       borderRight: `1px solid ${theme.tokens.sideNavigation.Border}`,
-      height: `calc(100% - ${TOPMENU_HEIGHT}px - ${FOOTER_HEIGHT}px)`,
-      top: TOPMENU_HEIGHT,
+      height: '100%',
+      top: 0,
     },
     transform: 'none',
     transition: 'width linear .1s',
     width: SIDEBAR_WIDTH,
   },
+  height: 'calc(100vh - 52px)',
+  overflowY: 'auto',
+  position: 'sticky',
+  top: 0,
   ...(props.collapse && {
     [theme.breakpoints.up('md')]: {
       '& .MuiDrawer-paper': {
@@ -111,9 +116,6 @@ const StyledDrawer = styled(Drawer, {
       },
       '& a[aria-current="true"]': {
         background: theme.tokens.sideNavigation.SelectedMenuItem.Background,
-      },
-      '&.MuiDrawer-docked': {
-        height: '100%',
       },
       // when the nav is collapsed, we want to visually hide expanded content and single links like Managed
       '.MuiAccordion-region, div[class*="StyledSingleLinkBox"]': {
