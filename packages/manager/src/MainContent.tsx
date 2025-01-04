@@ -10,10 +10,13 @@ import Logo from 'src/assets/logo/akamai-logo.svg';
 import { MainContentBanner } from 'src/components/MainContentBanner';
 import { MaintenanceScreen } from 'src/components/MaintenanceScreen';
 import { SideMenu } from 'src/components/PrimaryNav/SideMenu';
-import { SIDEBAR_WIDTH } from 'src/components/PrimaryNav/SideMenu';
+import {
+  SIDEBAR_COLLAPSED_WIDTH,
+  SIDEBAR_WIDTH,
+} from 'src/components/PrimaryNav/SideMenu';
 import { SuspenseLoader } from 'src/components/SuspenseLoader';
 import { useDialogContext } from 'src/context/useDialogContext';
-import { Footer } from 'src/features/Footer';
+import { FOOTER_HEIGHT, Footer } from 'src/features/Footer';
 import { GlobalNotifications } from 'src/features/GlobalNotifications/GlobalNotifications';
 import {
   notificationCenterContext,
@@ -81,15 +84,14 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   content: {
     flex: 1,
-    [theme.breakpoints.up('md')]: {
-      marginLeft: SIDEBAR_WIDTH,
-    },
+    paddingBottom: FOOTER_HEIGHT,
     transition: 'margin-left .1s linear',
   },
   fullWidthContent: {
     marginLeft: 0,
+    paddingLeft: SIDEBAR_COLLAPSED_WIDTH,
     [theme.breakpoints.up('md')]: {
-      marginLeft: 52,
+      marginLeft: -SIDEBAR_WIDTH,
     },
   },
   grid: {
@@ -303,8 +305,8 @@ export const MainContent = () => {
                 openSideMenu={() => toggleMenu(true)}
                 username={username}
               />
-              <Box display="flex" position="relative">
-                <Box position="relative">
+              <Box display="flex" position="sticky" top={0}>
+                <Box position="relative" width={SIDEBAR_WIDTH} zIndex={10000}>
                   <SideMenu
                     closeMenu={() => toggleMenu(false)}
                     collapse={desktopMenuIsOpen || false}

@@ -1,3 +1,6 @@
+import * as React from 'react';
+import { debounce } from 'throttle-debounce';
+
 import { isPathOneOf } from 'src/utilities/routing/isPathOneOf';
 
 export const linkIsActive = (
@@ -18,4 +21,30 @@ export const linkIsActive = (
   }
 
   return isPathOneOf([href, ...activeLinks], locationPathname);
+};
+
+export const useIsWindowAtBottom = () => {
+  const [isBottom, setIsBottom] = React.useState(false);
+  const checkIfBottom = React.useCallback(
+    debounce(10, () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY;
+      const bottom = Math.ceil(windowHeight + scrollTop) >= documentHeight;
+
+      setIsBottom(bottom);
+    }),
+    []
+  );
+
+  React.useEffect(() => {
+    checkIfBottom();
+    const onScroll = () => requestAnimationFrame(checkIfBottom);
+    document.body.onscroll = onScroll;
+    return () => {
+      document.body.onscroll = null;
+    };
+  }, [checkIfBottom]);
+
+  return isBottom;
 };

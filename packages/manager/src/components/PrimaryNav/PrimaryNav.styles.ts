@@ -9,17 +9,10 @@ import { SIDEBAR_WIDTH } from 'src/components/PrimaryNav/SideMenu';
 
 export const StyledGrid = styled(Grid, {
   label: 'StyledGrid',
-})(({ theme }) => ({
+})(() => ({
   height: '100%',
   margin: 0,
-  minHeight: 64,
   padding: 0,
-  [theme.breakpoints.up('md')]: {
-    minHeight: 80,
-  },
-  [theme.breakpoints.up('sm')]: {
-    minHeight: 72,
-  },
   width: '100%',
 }));
 

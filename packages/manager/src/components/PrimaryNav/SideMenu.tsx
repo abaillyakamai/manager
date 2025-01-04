@@ -79,10 +79,10 @@ const StyledDrawer = styled(Drawer, {
   '& .MuiDrawer-paper': {
     backgroundColor: theme.tokens.sideNavigation.Background.Default,
     boxShadow: 'none',
-    height: '100%',
+    height: '100vh',
     left: 'inherit',
     overflowX: 'hidden',
-    position: 'relative',
+    position: 'absolute',
     [theme.breakpoints.up('md')]: {
       borderRight: `1px solid ${theme.tokens.sideNavigation.Border}`,
       height: '100%',
@@ -91,8 +91,9 @@ const StyledDrawer = styled(Drawer, {
     transform: 'none',
     transition: 'width linear .1s',
     width: SIDEBAR_WIDTH,
+    zIndex: 1000,
   },
-  height: 'calc(100vh - 52px)',
+  height: '100vh',
   overflowY: 'auto',
   position: 'sticky',
   top: 0,

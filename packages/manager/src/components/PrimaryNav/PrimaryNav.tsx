@@ -2,8 +2,8 @@ import { Box, Tooltip } from '@linode/ui';
 import { Hidden } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import * as React from 'react';
-import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import Storage from 'src/assets/icons/entityIcons/bucket.svg';
 import Database from 'src/assets/icons/entityIcons/database.svg';
@@ -36,6 +36,7 @@ import {
   StyledMenuGrid,
 } from './PrimaryNav.styles';
 import { linkIsActive } from './utils';
+import { useIsWindowAtBottom } from './utils';
 
 import type { PrimaryLink as PrimaryLinkType } from './PrimaryLink';
 
@@ -106,6 +107,8 @@ export const PrimaryNav = (props: PrimaryNavProps) => {
   const collapsedAccordions = collapsedSideNavPreference ?? [];
 
   const { mutateAsync: updatePreferences } = useMutatePreferences();
+
+  const isBottom = useIsWindowAtBottom();
 
   const productFamilyLinkGroups: ProductFamilyLinkGroup<
     PrimaryLinkType[]
@@ -389,9 +392,16 @@ export const PrimaryNav = (props: PrimaryNavProps) => {
         })}
       </StyledMenuGrid>
       <Hidden mdDown>
-        <Box padding={1}>
+        <Box
+          sx={{
+            transition: 'bottom 0.2s ease-in-out',
+          }}
+          bottom={isBottom ? 40 : 0}
+          padding={1}
+          position="fixed"
+        >
           {!isCollapsed ? (
-            <Tooltip placement="top-end" title={'unpin side menu'}>
+            <Tooltip placement="right" title={'unpin side menu'}>
               <StyledIconButton
                 aria-label="unpin menu"
                 data-testid="unpin-nav-menu"
@@ -402,7 +412,17 @@ export const PrimaryNav = (props: PrimaryNavProps) => {
               </StyledIconButton>
             </Tooltip>
           ) : (
-            <Tooltip placement="top-end" title={'pin side menu'}>
+            <Tooltip
+              PopperProps={{
+                sx: {
+                  '& .MuiTooltip-tooltip': {
+                    padding: 0.5,
+                  },
+                },
+              }}
+              placement="right"
+              title={'pin side menu'}
+            >
               <StyledIconButton
                 aria-label="pin menu"
                 data-testid="pin-nav-menu"

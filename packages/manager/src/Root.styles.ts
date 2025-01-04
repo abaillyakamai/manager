@@ -51,9 +51,6 @@ export const useStyles = makeStyles()((theme: Theme) => ({
   },
   fullWidthContent: {
     marginLeft: 0,
-    [theme.breakpoints.up('md')]: {
-      marginLeft: 52,
-    },
   },
   grid: {
     marginLeft: 0,
